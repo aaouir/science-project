@@ -1,280 +1,564 @@
 /**
- * Palestinian Archive — main.js
+ * Palestinian Archive Theme — Main JavaScript
+ *
+ * Handles: sticky header, mobile nav, RTL/LTR toggle, language toggle,
+ * lightbox, archive AJAX filtering, search dropdown, lazy loading,
+ * and accessibility enhancements.
  */
-(function() {
-'use strict';
 
-const PA = window.PA = {};
+(function ($) {
+    'use strict';
 
-/* ============================================================
-   LANGUAGE / DIRECTION TOGGLE
-   ============================================================ */
-PA.setLang = function(lang) {
-  const isAr = lang === 'ar';
-  document.documentElement.dir = isAr ? 'rtl' : 'ltr';
-  document.body.classList.toggle('lang-en', !isAr);
-  document.body.classList.toggle('rtl', isAr);
+    /* ============================================================
+       NAMESPACE
+       ============================================================ */
+    window.PA = window.PA || {};
 
-  document.getElementById('btn-ar')?.setAttribute('aria-pressed', isAr ? 'true' : 'false');
-  document.getElementById('btn-en')?.setAttribute('aria-pressed', isAr ? 'false' : 'true');
-  document.getElementById('btn-ar')?.classList.toggle('active', isAr);
-  document.getElementById('btn-en')?.classList.toggle('active', !isAr);
+    /* ============================================================
+       DOCUMENT READY
+       ============================================================ */
+    $(function () {
+        PA.init();
+    });
 
-  try { localStorage.setItem('pa_lang', lang); } catch(e) {}
-};
+    /* ============================================================
+       CORE INIT
+       ============================================================ */
+    PA.init = function () {
+        PA.stickyHeader();
+        PA.mobileNav();
+        PA.searchToggle();
+        PA.langToggle();
+        PA.rtlLtrToggle();
+        PA.lightbox();
+        PA.archiveFilter();
+        PA.lazyImages();
+        PA.scrollToTop();
+        PA.keyboardNav();
+        PA.initAnimations();
+        PA.restorePreferences();
+    };
 
-/* ============================================================
-   MOBILE MENU
-   ============================================================ */
-function initMobileMenu() {
-  const toggle = document.querySelector('.menu-toggle');
-  const nav    = document.getElementById('primary-navigation');
-  if (!toggle || !nav) return;
+    /* ============================================================
+       STICKY HEADER
+       ============================================================ */
+    PA.stickyHeader = function () {
+        var $header = $('#site-header');
+        if (!$header.length) return;
 
-  toggle.addEventListener('click', function() {
-    const open = nav.classList.toggle('mobile-open');
-    toggle.classList.toggle('active', open);
-    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-  });
+        var scrollThreshold = 80;
 
-  // Close on outside click
-  document.addEventListener('click', function(e) {
-    if (!nav.contains(e.target) && !toggle.contains(e.target)) {
-      nav.classList.remove('mobile-open');
-      toggle.classList.remove('active');
-      toggle.setAttribute('aria-expanded', 'false');
-    }
-  });
-
-  // Sub-menu toggle on mobile
-  nav.querySelectorAll('.primary-menu > li > a').forEach(link => {
-    if (link.nextElementSibling?.classList.contains('sub-menu')) {
-      link.addEventListener('click', function(e) {
-        if (window.innerWidth <= 768) {
-          e.preventDefault();
-          link.parentElement.classList.toggle('open');
+        function handleScroll() {
+            if ($(window).scrollTop() > scrollThreshold) {
+                $header.addClass('scrolled');
+            } else {
+                $header.removeClass('scrolled');
+            }
         }
-      });
-    }
-  });
-}
 
-/* ============================================================
-   HEADER SCROLL EFFECT
-   ============================================================ */
-function initHeaderScroll() {
-  const header = document.getElementById('site-header');
-  if (!header) return;
-  const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 50);
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
-}
+        $(window).on('scroll.stickyHeader', function () {
+            handleScroll();
+        });
 
-/* ============================================================
-   LIGHTBOX
-   ============================================================ */
-const lightboxImages = [];
-let currentLightboxIdx = 0;
+        handleScroll();
+    };
 
-function openLightbox(src, caption, idx) {
-  const overlay = document.getElementById('pa-lightbox');
-  const img     = document.getElementById('pa-lightbox-img');
-  const cap     = document.getElementById('pa-lightbox-caption');
-  if (!overlay || !img) return;
+    /* ============================================================
+       MOBILE NAVIGATION
+       ============================================================ */
+    PA.mobileNav = function () {
+        var $toggle    = $('#menuToggle');
+        var $nav       = $('#primary-navigation');
+        var $menuItems = $nav.find('.primary-menu > li');
 
-  img.src = src;
-  img.alt = caption || '';
-  if (cap) cap.textContent = caption || '';
-  currentLightboxIdx = idx !== undefined ? idx : 0;
-  overlay.classList.add('active');
-  document.body.style.overflow = 'hidden';
-}
+        if (!$toggle.length) return;
 
-PA.closeLightbox = function() {
-  const overlay = document.getElementById('pa-lightbox');
-  if (overlay) overlay.classList.remove('active');
-  document.body.style.overflow = '';
-};
+        $toggle.on('click.mobileNav', function () {
+            var isOpen = $nav.hasClass('mobile-open');
+            $nav.toggleClass('mobile-open');
+            $toggle.toggleClass('active');
+            $toggle.attr('aria-expanded', !isOpen);
+            $nav.attr('aria-hidden', isOpen);
+        });
 
-PA.lightboxNav = function(dir) {
-  if (!lightboxImages.length) return;
-  currentLightboxIdx = (currentLightboxIdx + dir + lightboxImages.length) % lightboxImages.length;
-  const item = lightboxImages[currentLightboxIdx];
-  openLightbox(item.src, item.caption, currentLightboxIdx);
-};
+        // Sub-menu toggling on mobile
+        $menuItems.each(function () {
+            var $item    = $(this);
+            var $submenu = $item.children('.sub-menu');
+            if (!$submenu.length) return;
 
-function initLightbox() {
-  document.querySelectorAll('.pa-lightbox-trigger').forEach((el, idx) => {
-    lightboxImages.push({
-      src:     el.href,
-      caption: el.dataset.caption || '',
-    });
-    el.addEventListener('click', function(e) {
-      e.preventDefault();
-      openLightbox(el.href, el.dataset.caption || '', idx);
-    });
-  });
+            var $link = $item.children('a');
+            $link.on('click.subMenu', function (e) {
+                if ($(window).width() <= 768) {
+                    e.preventDefault();
+                    $item.toggleClass('open');
+                    $submenu.slideToggle(200);
+                }
+            });
+        });
 
-  // Close on overlay click / Escape
-  const overlay = document.getElementById('pa-lightbox');
-  if (overlay) {
-    overlay.addEventListener('click', function(e) {
-      if (e.target === overlay) PA.closeLightbox();
-    });
-  }
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') PA.closeLightbox();
-    if (e.key === 'ArrowLeft')  PA.lightboxNav(1);
-    if (e.key === 'ArrowRight') PA.lightboxNav(-1);
-  });
-}
+        // Close nav when clicking outside
+        $(document).on('click.mobileNav', function (e) {
+            if (!$(e.target).closest('#site-header').length) {
+                $nav.removeClass('mobile-open');
+                $toggle.removeClass('active').attr('aria-expanded', 'false');
+            }
+        });
 
-/* ============================================================
-   ARCHIVE AJAX FILTER
-   ============================================================ */
-function initArchiveFilter() {
-  const periodEl  = document.getElementById('filter-period');
-  const locationEl= document.getElementById('filter-location');
-  const doctypeEl = document.getElementById('filter-doctype');
-  const resetBtn  = document.getElementById('filter-reset');
-  const results   = document.getElementById('archive-results');
-  const countEl   = document.getElementById('filter-count');
+        // Close on escape
+        $(document).on('keydown.mobileNav', function (e) {
+            if (e.key === 'Escape' && $nav.hasClass('mobile-open')) {
+                $nav.removeClass('mobile-open');
+                $toggle.removeClass('active').attr('aria-expanded', 'false');
+                $toggle.focus();
+            }
+        });
+    };
 
-  if (!periodEl || !results) return;
+    /* ============================================================
+       SEARCH DROPDOWN TOGGLE
+       ============================================================ */
+    PA.searchToggle = function () {
+        var $btn        = $('.header-search-toggle');
+        var $searchForm = $('#header-search');
+        var $input      = $('#header-search-input');
 
-  const postType = document.querySelector('[data-post-type]')?.dataset.postType
-    || document.body.className.match(/post-type-([^\s]+)/)?.[1]
-    || 'pa_document';
+        if (!$btn.length) return;
 
-  let debounceTimer;
+        $btn.on('click.search', function () {
+            var isOpen = $searchForm.hasClass('active');
+            $searchForm.toggleClass('active');
+            $btn.attr('aria-expanded', !isOpen);
 
-  function runFilter() {
-    clearTimeout(debounceTimer);
-    debounceTimer = setTimeout(doFilter, 300);
-  }
+            if (!isOpen) {
+                // Focus input with small delay for animation
+                setTimeout(function () {
+                    $input.focus();
+                }, 100);
+            }
+        });
 
-  function doFilter() {
-    if (!window.PA_DATA) return;
-    results.style.opacity = '0.4';
+        // Close on escape
+        $searchForm.on('keydown.search', function (e) {
+            if (e.key === 'Escape') {
+                $searchForm.removeClass('active');
+                $btn.attr('aria-expanded', 'false').focus();
+            }
+        });
 
-    const params = new URLSearchParams({
-      action:       'pa_filter',
-      nonce:        PA_DATA.nonce,
-      post_type:    postType,
-      pa_period:    periodEl?.value || '',
-      pa_location_tax: locationEl?.value || '',
-      pa_doc_type:  doctypeEl?.value || '',
-    });
+        // Close when clicking outside
+        $(document).on('click.search', function (e) {
+            if (!$(e.target).closest('#site-header').length) {
+                $searchForm.removeClass('active');
+                $btn.attr('aria-expanded', 'false');
+            }
+        });
+    };
 
-    fetch(PA_DATA.ajaxurl, { method: 'POST', body: params })
-      .then(r => r.json())
-      .then(data => {
-        if (data.success) {
-          results.innerHTML = data.data.html;
-          results.style.opacity = '1';
-          if (countEl) countEl.textContent = data.data.total + ' نتيجة';
-          initLightbox(); // re-init for new items
+    /* ============================================================
+       LANGUAGE TOGGLE (Arabic/English)
+       ============================================================ */
+    PA.langToggle = function () {
+        var $btn  = $('#langToggle');
+        var $body = $('body');
+
+        if (!$btn.length) return;
+
+        var currentLang = localStorage.getItem('pa_language') || 'ar';
+
+        function applyLang(lang) {
+            if (lang === 'en') {
+                $body.addClass('lang-en');
+                $btn.text('AR / عر');
+                $('html').attr('lang', 'en');
+            } else {
+                $body.removeClass('lang-en');
+                $btn.text('EN / AR');
+                $('html').attr('lang', 'ar');
+            }
         }
-      })
-      .catch(() => { results.style.opacity = '1'; });
-  }
 
-  [periodEl, locationEl, doctypeEl].forEach(el => el?.addEventListener('change', runFilter));
+        applyLang(currentLang);
 
-  resetBtn?.addEventListener('click', function() {
-    if (periodEl)   periodEl.value   = '';
-    if (locationEl) locationEl.value = '';
-    if (doctypeEl)  doctypeEl.value  = '';
-    doFilter();
-  });
-}
+        $btn.on('click.langToggle', function () {
+            currentLang = currentLang === 'ar' ? 'en' : 'ar';
+            applyLang(currentLang);
+            localStorage.setItem('pa_language', currentLang);
+        });
+    };
 
-/* ============================================================
-   CARD HOVER — load-as-you-scroll (Intersection Observer)
-   ============================================================ */
-function initLazyCards() {
-  const cards = document.querySelectorAll('.document-card, .category-card');
-  if (!('IntersectionObserver' in window)) return;
+    /* ============================================================
+       RTL/LTR TOGGLE
+       ============================================================ */
+    PA.rtlLtrToggle = function () {
+        var $btn  = $('#rtlLtrToggle');
+        var $html = $('html');
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.style.opacity = '1';
-        entry.target.style.transform = 'translateY(0)';
-        observer.unobserve(entry.target);
-      }
+        if (!$btn.length) return;
+
+        var currentDir = localStorage.getItem('pa_direction') || ($html.attr('dir') || 'rtl');
+        $html.attr('dir', currentDir);
+
+        $btn.on('click.rtlLtr', function () {
+            currentDir = currentDir === 'rtl' ? 'ltr' : 'rtl';
+            $html.attr('dir', currentDir);
+            localStorage.setItem('pa_direction', currentDir);
+            $btn.text(currentDir.toUpperCase());
+        });
+    };
+
+    /* ============================================================
+       LIGHTBOX
+       ============================================================ */
+    PA.lightbox = function () {
+        var $overlay  = $('#lightbox');
+        var $img      = $('#lightboxImage');
+        var $caption  = $('#lightboxCaption');
+        var $close    = $('#lightboxClose');
+        var $prev     = $('#lightboxPrev');
+        var $next     = $('#lightboxNext');
+        var images    = [];
+        var currentIdx = 0;
+
+        if (!$overlay.length) return;
+
+        // Collect lightbox images
+        function collectImages() {
+            images = [];
+            $('[data-lightbox]').each(function (i) {
+                var $el = $(this);
+                images.push({
+                    src     : $el.data('lightbox') || $el.attr('href') || '',
+                    caption : $el.data('caption') || $el.attr('title') || $el.find('img').attr('alt') || '',
+                    index   : i,
+                });
+                $el.attr('data-lightbox-index', i);
+            });
+        }
+
+        function openLightbox(idx) {
+            collectImages();
+            if (!images[idx]) return;
+            currentIdx = idx;
+            var item = images[idx];
+            $img.attr('src', item.src).attr('alt', item.caption);
+            $caption.text(item.caption);
+            $overlay.addClass('active');
+            $('body').css('overflow', 'hidden');
+            $close.focus();
+            updateNavButtons();
+        }
+
+        function closeLightbox() {
+            $overlay.removeClass('active');
+            $('body').css('overflow', '');
+            $img.attr('src', '');
+        }
+
+        function navigate(dir) {
+            var newIdx = currentIdx + dir;
+            if (newIdx < 0) newIdx = images.length - 1;
+            if (newIdx >= images.length) newIdx = 0;
+            openLightbox(newIdx);
+        }
+
+        function updateNavButtons() {
+            $prev.toggle(images.length > 1);
+            $next.toggle(images.length > 1);
+        }
+
+        // Public API
+        PA.openLightbox  = openLightbox;
+        PA.closeLightbox = closeLightbox;
+        PA.lightboxNav   = navigate;
+
+        // Events
+        $(document).on('click.lightbox', '[data-lightbox]', function (e) {
+            e.preventDefault();
+            var idx = parseInt($(this).attr('data-lightbox-index')) || 0;
+            openLightbox(idx);
+        });
+
+        $close.on('click.lightbox',   closeLightbox);
+        $prev.on('click.lightbox',    function () { navigate(-1); });
+        $next.on('click.lightbox',    function () { navigate(1); });
+
+        $overlay.on('click.lightbox', function (e) {
+            if ($(e.target).is($overlay)) closeLightbox();
+        });
+
+        $(document).on('keydown.lightbox', function (e) {
+            if (!$overlay.hasClass('active')) return;
+            if (e.key === 'Escape')    closeLightbox();
+            if (e.key === 'ArrowLeft')  navigate($('html').attr('dir') === 'rtl' ? 1 : -1);
+            if (e.key === 'ArrowRight') navigate($('html').attr('dir') === 'rtl' ? -1 : 1);
+        });
+
+        // Auto-convert gallery images to lightbox
+        $('.entry-content img, .card-thumbnail img').each(function () {
+            var $img2 = $(this);
+            var src   = $img2.attr('src');
+            if (src && !$img2.closest('a').length) {
+                $img2.wrap('<a href="' + src + '" data-lightbox="' + src + '" data-caption="' + ($img2.attr('alt') || '') + '"></a>');
+            }
+        });
+    };
+
+    /* ============================================================
+       ARCHIVE AJAX FILTER
+       ============================================================ */
+    PA.archiveFilter = function () {
+        var $filterSelects = $('.filter-select');
+        var $grid          = $('#archiveGrid');
+        var $loading       = $('#archiveLoading');
+        var $countEl       = $('#filterCount');
+        var $resetBtn      = $('#filterReset');
+
+        if (!$grid.length) return;
+
+        var filterTimeout = null;
+
+        function doFilter() {
+            if (!paTheme || !paTheme.ajaxUrl) return;
+
+            var postType = $grid.data('post-type') || 'pa_document';
+            var period   = $('#filterPeriod').val() || '';
+            var location = $('#filterLocation').val() || '';
+            var topic    = $('#filterTopic').val() || '';
+
+            clearTimeout(filterTimeout);
+
+            filterTimeout = setTimeout(function () {
+                $grid.css('opacity', 0.4);
+                $loading.show();
+
+                $.ajax({
+                    url  : paTheme.ajaxUrl,
+                    type : 'POST',
+                    data : {
+                        action    : 'pa_filter_archive',
+                        nonce     : paTheme.nonce,
+                        post_type : postType,
+                        period    : period,
+                        location  : location,
+                        topic     : topic,
+                        paged     : 1,
+                    },
+                    success: function (response) {
+                        if (response.success) {
+                            $grid.html(response.data.html);
+                            if ($countEl.length) {
+                                $countEl.text(response.data.total + ' ' + (paTheme.strings ? paTheme.strings.noResults || '' : ''));
+                            }
+                            PA.lazyImages();
+                        }
+                    },
+                    error: function () {
+                        console.error('PA: Archive filter AJAX error');
+                    },
+                    complete: function () {
+                        $grid.css('opacity', 1);
+                        $loading.hide();
+                    },
+                });
+            }, 350);
+        }
+
+        $filterSelects.on('change.filter', doFilter);
+
+        $resetBtn.on('click.filter', function () {
+            $filterSelects.val('');
+            doFilter();
+        });
+    };
+
+    /* ============================================================
+       LAZY IMAGES (IntersectionObserver)
+       ============================================================ */
+    PA.lazyImages = function () {
+        if ('IntersectionObserver' in window) {
+            var observer = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        var $el = $(entry.target);
+                        var src = $el.data('src');
+                        if (src) {
+                            $el.attr('src', src).removeAttr('data-src');
+                        }
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { rootMargin: '100px' });
+
+            $('img[data-src]').each(function () {
+                observer.observe(this);
+            });
+        } else {
+            // Fallback: load all lazy images
+            $('img[data-src]').each(function () {
+                $(this).attr('src', $(this).data('src')).removeAttr('data-src');
+            });
+        }
+    };
+
+    /* ============================================================
+       SCROLL TO TOP BUTTON
+       ============================================================ */
+    PA.scrollToTop = function () {
+        // Create button dynamically
+        var $btn = $('<button>', {
+            id        : 'scrollToTop',
+            'aria-label': 'العودة للأعلى / Back to top',
+            html      : '&#8679;',
+            css       : {
+                position   : 'fixed',
+                bottom     : '5rem',
+                left       : '1.5rem',
+                zIndex     : 499,
+                background : 'var(--color-olive)',
+                color      : '#fff',
+                border     : 'none',
+                borderRadius: '50%',
+                width      : '44px',
+                height     : '44px',
+                fontSize   : '1.4rem',
+                cursor     : 'pointer',
+                opacity    : 0,
+                transition : 'opacity 0.3s, background 0.2s',
+                boxShadow  : '0 2px 8px rgba(0,0,0,0.2)',
+            },
+        });
+
+        $('body').append($btn);
+
+        $(window).on('scroll.scrollToTop', function () {
+            if ($(this).scrollTop() > 400) {
+                $btn.css('opacity', 1);
+            } else {
+                $btn.css('opacity', 0);
+            }
+        });
+
+        $btn.on('click.scrollToTop', function () {
+            $('html, body').animate({ scrollTop: 0 }, 500);
+        });
+    };
+
+    /* ============================================================
+       KEYBOARD NAVIGATION HELPERS
+       ============================================================ */
+    PA.keyboardNav = function () {
+        // Add focus-visible polyfill behavior
+        var usingKeyboard = false;
+
+        $(document).on('keydown.keyboard', function () {
+            usingKeyboard = true;
+            $('body').addClass('using-keyboard');
+        });
+
+        $(document).on('mousedown.keyboard', function () {
+            usingKeyboard = false;
+            $('body').removeClass('using-keyboard');
+        });
+
+        // Trap focus in lightbox
+        $('#lightbox').on('keydown.trap', function (e) {
+            if (e.key !== 'Tab') return;
+            var $focusable = $(this).find('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])').filter(':visible');
+            var $first = $focusable.first();
+            var $last  = $focusable.last();
+
+            if (e.shiftKey) {
+                if ($(document.activeElement).is($first)) {
+                    e.preventDefault();
+                    $last.focus();
+                }
+            } else {
+                if ($(document.activeElement).is($last)) {
+                    e.preventDefault();
+                    $first.focus();
+                }
+            }
+        });
+    };
+
+    /* ============================================================
+       ENTRANCE ANIMATIONS
+       ============================================================ */
+    PA.initAnimations = function () {
+        if (!('IntersectionObserver' in window)) return;
+
+        var observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    $(entry.target).css({
+                        opacity   : 1,
+                        transform : 'translateY(0)',
+                        transition: 'opacity 0.5s ease, transform 0.5s ease',
+                    });
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        $('.document-card, .widget, .hero-stat-item').each(function () {
+            $(this).css({
+                opacity  : 0,
+                transform: 'translateY(20px)',
+            });
+            observer.observe(this);
+        });
+    };
+
+    /* ============================================================
+       RESTORE USER PREFERENCES (language, direction)
+       ============================================================ */
+    PA.restorePreferences = function () {
+        var savedDir  = localStorage.getItem('pa_direction');
+        var savedLang = localStorage.getItem('pa_language');
+
+        if (savedDir) {
+            $('html').attr('dir', savedDir);
+        }
+        if (savedLang === 'en') {
+            $('body').addClass('lang-en');
+        }
+    };
+
+    /* ============================================================
+       CARD HOVER EFFECT (for touch devices)
+       ============================================================ */
+    $(document).on('touchstart.card', '.document-card', function () {
+        $(this).addClass('touch-hover');
+    }).on('touchend.card', '.document-card', function () {
+        var $card = $(this);
+        setTimeout(function () { $card.removeClass('touch-hover'); }, 300);
     });
-  }, { threshold: 0.1 });
 
-  cards.forEach((card, i) => {
-    card.style.opacity = '0';
-    card.style.transform = 'translateY(20px)';
-    card.style.transition = `opacity .4s ease ${i * 0.05}s, transform .4s ease ${i * 0.05}s`;
-    observer.observe(card);
-  });
-}
+    /* ============================================================
+       PRINT HELPER
+       ============================================================ */
+    PA.print = function () {
+        window.print();
+    };
 
-/* ============================================================
-   STICKY FILTER BAR
-   ============================================================ */
-function initStickyFilter() {
-  const bar = document.querySelector('.archive-filter-bar');
-  if (!bar) return;
-  const header = document.getElementById('site-header');
-  const headerH = header ? header.offsetHeight : 0;
-  bar.style.setProperty('--header-height', headerH + 'px');
-}
-
-/* ============================================================
-   COUNTER ANIMATION
-   ============================================================ */
-function animateCounter(el) {
-  const target = parseInt(el.textContent.replace(/[^\d]/g, ''), 10);
-  if (!target) return;
-  let current = 0;
-  const increment = Math.ceil(target / 60);
-  const timer = setInterval(() => {
-    current = Math.min(current + increment, target);
-    el.textContent = current.toLocaleString('ar-EG');
-    if (current >= target) clearInterval(timer);
-  }, 16);
-}
-
-function initCounters() {
-  const counters = document.querySelectorAll('.hero-stat-number, .stat-num');
-  if (!('IntersectionObserver' in window)) return;
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) { animateCounter(e.target); observer.unobserve(e.target); }
+    $(document).on('click.print', '[data-action="print"]', function (e) {
+        e.preventDefault();
+        PA.print();
     });
-  });
-  counters.forEach(c => observer.observe(c));
-}
 
-/* ============================================================
-   RESTORE LANGUAGE PREFERENCE
-   ============================================================ */
-function restoreLang() {
-  try {
-    const saved = localStorage.getItem('pa_lang');
-    if (saved && saved !== (document.documentElement.dir === 'rtl' ? 'ar' : 'en')) {
-      PA.setLang(saved);
-    }
-  } catch(e) {}
-}
+    /* ============================================================
+       FILTER BAR STICKY HEIGHT COMPENSATION
+       ============================================================ */
+    PA.updateFilterBarOffset = function () {
+        var $filterBar = $('#archiveFilterBar');
+        var $header    = $('#site-header');
+        if ($filterBar.length && $header.length) {
+            $filterBar.css('top', $header.outerHeight() + 'px');
+        }
+    };
 
-/* ============================================================
-   INIT
-   ============================================================ */
-document.addEventListener('DOMContentLoaded', function() {
-  restoreLang();
-  initMobileMenu();
-  initHeaderScroll();
-  initLightbox();
-  initArchiveFilter();
-  initLazyCards();
-  initStickyFilter();
-  initCounters();
-});
+    $(window).on('resize.filterBar', PA.updateFilterBarOffset);
+    PA.updateFilterBarOffset();
 
-})();
+})(jQuery);
