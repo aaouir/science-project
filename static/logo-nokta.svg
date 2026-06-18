@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 90" role="img" aria-label="نقطة - المجتمع العلمي العربي">
+  <!-- Green leaf shape -->
+  <path d="M290,12 C305,12 318,25 318,44 C318,63 305,76 290,76 C275,50 275,38 290,12Z" fill="#8dc63f"/>
+  <path d="M290,12 C275,38 275,50 290,76 C270,70 258,58 258,44 C258,30 270,18 290,12Z" fill="#5b9b1e"/>
+  <!-- نقطة text -->
+  <text x="248" y="52" font-family="serif" font-size="46" font-weight="bold" fill="#9b8c7e" text-anchor="end" direction="rtl">نقطة</text>
+  <!-- Subtitle -->
+  <text x="248" y="70" font-family="serif" font-size="14" fill="#9b8c7e" text-anchor="end" direction="rtl" letter-spacing="0.5">المجتمع العلمي العربي</text>
+</svg>

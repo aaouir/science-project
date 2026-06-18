@@ -18,8 +18,7 @@ export default function Navigation() {
     <header className={styles.header}>
       <div className={styles.headerInner}>
         <Link to="/" className={styles.logo}>
-          <span className={styles.logoText}>نقطة</span>
-          <span className={styles.logoDot}>·</span>
+          <img src="/logo-nokta.svg" alt="نقطة - المجتمع العلمي العربي" className={styles.logoImg} />
         </Link>
 
         <button

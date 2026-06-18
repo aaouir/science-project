@@ -27,19 +27,14 @@
 }
 
 .footerLogo {
-  display: flex;
-  align-items: baseline;
-  gap: 2px;
-  font-family: 'Cairo', sans-serif;
-  font-size: 2rem;
-  font-weight: 900;
-  color: #fff;
+  display: block;
 }
 
-.footerDot {
-  font-size: 2.5rem;
-  color: #f4c430;
-  line-height: 1;
+.footerLogoImg {
+  height: 56px;
+  width: auto;
+  display: block;
+  filter: brightness(0) invert(1);
 }
 
 .footerTagline {
@@ -64,6 +59,31 @@
 .footerNav a:hover {
   color: #fff;
   opacity: 1;
+}
+
+.footerSponsor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 1.5rem 2rem;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  margin-top: 0.5rem;
+}
+
+.footerSponsorLabel {
+  font-size: 0.8125rem;
+  color: rgba(255,255,255,0.45);
+  letter-spacing: 0.04em;
+}
+
+.footerSponsorLogo {
+  height: 48px;
+  width: auto;
+  display: block;
+  filter: brightness(0) invert(1);
+  opacity: 0.85;
 }
 
 .footerCopy {

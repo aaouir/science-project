@@ -4,8 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>نقطة - مجلة علمية عربية</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet" />
   <style>
+    /* ═══ IBM Plex Sans Arabic (embedded as base64 for preview — replace with actual TTF paths in prod) ═══ */
+    /* For this preview we fall back to system Arabic fonts */
     :root {
       --nav-bg: #0b0b1f;
       --bg: #f3f4f6;
@@ -27,198 +28,82 @@
     *, *::before, *::after { box-sizing: border-box; }
     html { direction: rtl; scroll-behavior: smooth; }
     body {
-      font-family: 'Cairo', Tahoma, Arial, sans-serif;
-      font-size: 1rem;
-      line-height: 1.75;
-      color: var(--text);
-      background: var(--bg);
-      margin: 0;
-      -webkit-font-smoothing: antialiased;
+      font-family: 'IBM Plex Sans Arabic', 'Segoe UI', Tahoma, Arial, sans-serif;
+      font-size: 1rem; line-height: 1.75;
+      color: var(--text); background: var(--bg);
+      margin: 0; -webkit-font-smoothing: antialiased;
     }
-    img { display: block; width: 100%; height: auto; }
+    img { display: block; max-width: 100%; height: auto; }
     h1,h2,h3,h4 { font-weight: 700; line-height: 1.3; margin-top: 0; }
     a { color: inherit; text-decoration: none; transition: opacity 0.2s; }
     a:hover { opacity: 0.75; }
 
-    /* ═══════════════════════════════ NAV ══════════════════════════════ */
-    .header {
-      background: var(--nav-bg);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      box-shadow: 0 1px 0 rgba(255,255,255,0.06);
-    }
-    .header-inner {
-      max-width: 1280px;
-      width: calc(100% - 3rem);
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 64px;
-      gap: 2rem;
-    }
-    .logo {
-      display: flex;
-      align-items: baseline;
-      gap: 2px;
-      flex-shrink: 0;
-    }
-    .logo-text {
-      font-size: 1.75rem;
-      font-weight: 900;
-      color: #fff;
-      letter-spacing: -0.5px;
-    }
-    .logo-dot { font-size: 2.25rem; color: #f4c430; line-height: 1; margin-right: -4px; }
-    .nav-list {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      list-style: none;
-      margin: 0; padding: 0;
-      gap: 0.25rem;
-    }
-    .nav-link {
-      color: rgba(255,255,255,0.75);
-      font-size: 0.9375rem;
-      font-weight: 600;
-      padding: 0.4rem 0.75rem;
-      border-radius: 6px;
-      transition: color 0.15s, background 0.15s;
-      white-space: nowrap;
-      cursor: pointer;
-    }
+    /* ══ NAV ══ */
+    .header { background: var(--nav-bg); position: sticky; top: 0; z-index: 100; box-shadow: 0 1px 0 rgba(255,255,255,0.06); }
+    .header-inner { max-width: 1280px; width: calc(100% - 3rem); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 72px; gap: 2rem; }
+    .logo { display: flex; align-items: center; flex-shrink: 0; }
+    .logo-img { height: 48px; width: auto; display: block; }
+    .nav-list { display: flex; align-items: center; justify-content: flex-end; list-style: none; margin: 0; padding: 0; gap: 0.25rem; }
+    .nav-link { color: rgba(255,255,255,0.75); font-size: 0.9375rem; font-weight: 500; padding: 0.4rem 0.75rem; border-radius: 6px; transition: color 0.15s, background 0.15s; white-space: nowrap; cursor: pointer; }
     .nav-link:hover { color: #fff; background: rgba(255,255,255,0.1); opacity: 1; }
     .nav-link.active { color: #fff; background: rgba(255,255,255,0.12); }
 
-    /* ═══════════════════════════════ HERO ══════════════════════════════ */
-    .hero {
-      background: linear-gradient(135deg, #0b0b1f 0%, #12122e 50%, #1a1040 100%);
-      color: #fff;
-      position: relative;
-      overflow: hidden;
-      padding: 5rem 1.5rem;
-      text-align: center;
-      min-height: 340px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+    /* ══ HERO ══ */
+    .hero { background: linear-gradient(135deg, #0b0b1f 0%, #12122e 50%, #1a1040 100%); color: #fff; position: relative; overflow: hidden; padding: 5rem 1.5rem; text-align: center; min-height: 320px; display: flex; align-items: center; justify-content: center; }
     .hero-content { position: relative; z-index: 2; max-width: 640px; margin: 0 auto; }
-    .hero-logo { display: inline-flex; align-items: baseline; gap: 4px; margin-bottom: 0.75rem; }
-    .hero-logo-text { font-size: 5rem; font-weight: 900; letter-spacing: -2px; line-height: 1; color: #fff; }
-    .hero-logo-dot { font-size: 6rem; color: #f4c430; line-height: 0.8; }
-    .hero-tagline {
-      font-size: 1.25rem; font-weight: 700;
-      color: rgba(255,255,255,0.85);
-      margin: 0 0 0.75rem;
-      letter-spacing: 0.05em;
-    }
-    .hero-desc { font-size: 1.0625rem; color: rgba(255,255,255,0.55); margin: 0 auto; max-width: 480px; }
+    .hero-logo { display: flex; justify-content: center; margin-bottom: 1.25rem; }
+    .hero-logo-img { height: 100px; width: auto; display: block; }
+    .hero-tagline { font-size: 1.125rem; font-weight: 500; color: rgba(255,255,255,0.65); margin: 0; letter-spacing: 0.04em; }
     .hero-decor { position: absolute; inset: 0; pointer-events: none; }
-    .hero-decor span { position: absolute; border-radius: 50%; border: 1px solid rgba(244,196,48,0.12); }
+    .hero-decor span { position: absolute; border-radius: 50%; border: 1px solid rgba(141,198,63,0.1); }
     .hero-decor span:nth-child(1) { width: 400px; height: 400px; top: -120px; left: -100px; }
-    .hero-decor span:nth-child(2) { width: 600px; height: 600px; bottom: -250px; right: -200px; border-color: rgba(255,255,255,0.05); }
-    .hero-decor span:nth-child(3) { width: 200px; height: 200px; top: 20px; right: 10%; border-color: rgba(244,196,48,0.08); }
+    .hero-decor span:nth-child(2) { width: 600px; height: 600px; bottom: -250px; right: -200px; border-color: rgba(255,255,255,0.04); }
+    .hero-decor span:nth-child(3) { width: 200px; height: 200px; top: 20px; right: 10%; border-color: rgba(141,198,63,0.07); }
 
-    /* ═══════════ EDITOR NOTE ═══════════ */
-    .editor-note {
-      background: #0b0b1f;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-    }
-    .editor-note-inner {
-      max-width: 860px;
-      width: calc(100% - 3rem);
-      margin: 0 auto;
-      padding: 3rem 0;
-      display: flex;
-      flex-direction: column;
-      gap: 1.25rem;
-    }
-    .editor-label {
-      display: flex; align-items: center; gap: 0.5rem;
-      font-size: 0.8125rem; font-weight: 700;
-      color: #f4c430; letter-spacing: 0.08em;
-    }
-    .editor-quote {
-      margin: 0; padding: 0; border: none;
-      font-size: 1.1875rem;
-      line-height: 1.85;
-      color: rgba(255,255,255,0.82);
-      font-style: normal;
-    }
-    .editor-quote::before { content: '"'; font-size: 1.5em; color: #f4c430; line-height: 0; vertical-align: -0.35em; margin-left: 0.2em; }
-    .editor-quote::after  { content: '"'; font-size: 1.5em; color: #f4c430; line-height: 0; vertical-align: -0.35em; margin-right: 0.2em; }
+    /* ══ EDITOR NOTE ══ */
+    .editor-note { background: #0b0b1f; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .editor-note-inner { max-width: 860px; width: calc(100% - 3rem); margin: 0 auto; padding: 3rem 0; display: flex; flex-direction: column; gap: 1.25rem; }
+    .editor-label { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8125rem; font-weight: 700; color: #8dc63f; letter-spacing: 0.08em; }
+    .editor-quote { margin: 0; padding: 0; border: none; font-size: 1.1875rem; line-height: 1.85; color: rgba(255,255,255,0.82); font-style: normal; }
+    .editor-quote::before { content: '"'; font-size: 1.5em; color: #8dc63f; line-height: 0; vertical-align: -0.35em; margin-left: 0.2em; }
+    .editor-quote::after  { content: '"'; font-size: 1.5em; color: #8dc63f; line-height: 0; vertical-align: -0.35em; margin-right: 0.2em; }
     .editor-footer { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
-    .editor-date  { font-size: 0.875rem; color: rgba(255,255,255,0.3); }
-    .editor-more  { font-size: 0.875rem; font-weight: 700; color: #f4c430; cursor: pointer; }
+    .editor-date { font-size: 0.875rem; color: rgba(255,255,255,0.3); }
+    .editor-more { font-size: 0.875rem; font-weight: 700; color: #8dc63f; cursor: pointer; }
 
-    /* ═══════════════════════════════ WRAPPER ══════════════════════════════ */
+    /* ══ LAYOUT ══ */
     .wrapper { max-width: 1280px; width: calc(100% - 3rem); margin: 0 auto; padding: 3rem 0; }
-    .section-headline {
-      font-size: 1.375rem; font-weight: 700;
-      padding-bottom: 0.625rem;
-      margin: 0 0 2rem;
-      border-bottom: 3px solid var(--accent);
-    }
+    .section-headline { font-size: 1.375rem; font-weight: 700; padding-bottom: 0.625rem; margin: 0 0 2rem; border-bottom: 3px solid var(--accent); }
 
-    /* ═══════════════════════════════ SECTION CARDS ══════════════════════════════ */
-    .sections-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-    }
-    .section-card {
-      display: flex;
-      flex-direction: column;
-      background: var(--surface);
-      border-radius: var(--radius);
-      padding: 2rem 1.75rem;
-      position: relative;
-      overflow: hidden;
-      box-shadow: var(--shadow);
-      transition: transform 0.2s, box-shadow 0.2s;
-      cursor: pointer;
-    }
-    .section-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); opacity: 1; }
-    .section-card.loqaymat { border-top: 4px solid var(--section-loqaymat); color: var(--section-loqaymat); }
-    .section-card.omk      { border-top: 4px solid var(--section-omk);      color: var(--section-omk); }
-    .section-card.qatar    { border-top: 4px solid var(--section-qatar);    color: var(--section-qatar); }
-    .section-card.tahar    { border-top: 4px solid var(--section-tahar);    color: var(--section-tahar); }
-    .section-card.sira     { border-top: 4px solid var(--section-sira);     color: var(--section-sira); }
-    .section-card.momar    { border-top: 4px solid var(--section-momar);    color: var(--section-momar); }
-    .section-icon { font-size: 2.25rem; margin-bottom: 0.75rem; line-height: 1; }
+    /* ══ SECTION CARDS ══ */
+    .sections-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .section-card { display: flex; flex-direction: column; background: var(--surface); border-radius: var(--radius); padding: 2rem 1.75rem; box-shadow: var(--shadow); transition: transform 0.2s, box-shadow 0.2s; cursor: pointer; }
+    .section-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+    .section-card.loqaymat { border-top: 4px solid var(--section-loqaymat); }
+    .section-card.omk      { border-top: 4px solid var(--section-omk); }
+    .section-card.qatar    { border-top: 4px solid var(--section-qatar); }
+    .section-card.tahar    { border-top: 4px solid var(--section-tahar); }
+    .section-card.sira     { border-top: 4px solid var(--section-sira); }
+    .section-card.momar    { border-top: 4px solid var(--section-momar); }
+    .section-icon { font-size: 2.25rem; margin-bottom: 0.75rem; }
     .section-name { font-size: 1.375rem; font-weight: 900; margin: 0 0 0.5rem; color: var(--text); }
     .section-desc { font-size: 0.9375rem; color: var(--text-muted); margin: 0; line-height: 1.6; flex: 1; }
+    .section-arrow.loqaymat { color: var(--section-loqaymat); }
+    .section-arrow.omk      { color: var(--section-omk); }
+    .section-arrow.qatar    { color: var(--section-qatar); }
+    .section-arrow.tahar    { color: var(--section-tahar); }
+    .section-arrow.sira     { color: var(--section-sira); }
+    .section-arrow.momar    { color: var(--section-momar); }
     .section-arrow { display: inline-block; margin-top: 1.25rem; font-size: 1.125rem; font-weight: 700; transition: transform 0.2s; }
     .section-card:hover .section-arrow { transform: translateX(-4px); }
 
-    /* ═══════════════════════════════ ARTICLE CARDS ══════════════════════════════ */
+    /* ══ ARTICLE CARDS ══ */
     .article-list { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem; }
-    .article-card {
-      background: var(--surface);
-      border-radius: var(--radius);
-      overflow: hidden;
-      box-shadow: var(--shadow);
-      display: flex;
-      flex-direction: column;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
+    .article-card { background: var(--surface); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); display: flex; flex-direction: column; transition: transform 0.2s, box-shadow 0.2s; }
     .article-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
-    .article-image-wrap { display: block; overflow: hidden; aspect-ratio: 16/9; background: #e5e7eb; }
-    .article-image-placeholder {
-      width: 100%; height: 100%; min-height: 168px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 2.5rem;
-      background: linear-gradient(135deg, #e5e7eb, #d1d5db);
-    }
+    .article-image-placeholder { width: 100%; aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; background: linear-gradient(135deg, #e5e7eb, #d1d5db); }
     .article-body { padding: 1.25rem 1.5rem 1.5rem; display: flex; flex-direction: column; flex: 1; }
-    .article-tag {
-      display: inline-block; font-size: 0.75rem; font-weight: 700;
-      padding: 0.2rem 0.6rem; border-radius: 4px; margin-bottom: 0.625rem;
-      width: fit-content;
-    }
+    .article-tag { display: inline-block; font-size: 0.75rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 4px; margin-bottom: 0.625rem; width: fit-content; }
     .tag-loqaymat { background: rgba(2,132,199,0.1); color: var(--section-loqaymat); }
     .tag-omk      { background: rgba(30,58,95,0.1);  color: var(--section-omk); }
     .tag-qatar    { background: rgba(153,27,27,0.1); color: var(--section-qatar); }
@@ -229,44 +114,40 @@
     .article-excerpt { font-size: 0.9rem; color: var(--text-muted); margin: 0 0 1rem; line-height: 1.6; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
     .article-date { font-size: 0.8125rem; color: var(--text-muted); margin-top: auto; }
 
-    /* ═══════════════════════════════ FOOTER ══════════════════════════════ */
+    /* ══ FOOTER ══ */
     .footer { background: var(--nav-bg); color: rgba(255,255,255,0.7); margin-top: 4rem; }
-    .footer-inner {
-      max-width: 1280px; width: calc(100% - 3rem);
-      margin: 0 auto; padding: 3rem 0 2rem;
-      display: flex; flex-direction: column; align-items: center;
-      gap: 1rem; text-align: center;
-    }
-    .footer-logo { display: flex; align-items: baseline; gap: 2px; font-size: 2rem; font-weight: 900; color: #fff; }
-    .footer-dot { font-size: 2.5rem; color: #f4c430; line-height: 1; }
-    .footer-tagline { font-size: 0.9375rem; margin: 0; color: rgba(255,255,255,0.5); }
+    .footer-inner { max-width: 1280px; width: calc(100% - 3rem); margin: 0 auto; padding: 3rem 0 2rem; display: flex; flex-direction: column; align-items: center; gap: 1.25rem; text-align: center; }
+    .footer-logo-img { height: 56px; width: auto; display: block; }
+    .footer-tagline { font-size: 0.9375rem; margin: 0; color: rgba(255,255,255,0.45); }
     .footer-nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem 1.5rem; }
-    .footer-nav a { font-size: 0.875rem; color: rgba(255,255,255,0.6); transition: color 0.15s; cursor: pointer; }
+    .footer-nav a { font-size: 0.875rem; color: rgba(255,255,255,0.55); cursor: pointer; }
     .footer-nav a:hover { color: #fff; opacity: 1; }
-    .footer-copy { font-size: 0.8125rem; margin: 0.5rem 0 0; color: rgba(255,255,255,0.3); }
+    .footer-sponsor { display: flex; flex-direction: column; align-items: center; gap: 0.625rem; padding: 1.25rem 2rem; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; margin-top: 0.25rem; }
+    .footer-sponsor-label { font-size: 0.8125rem; color: rgba(255,255,255,0.4); letter-spacing: 0.04em; }
+    .footer-sponsor-img { height: 44px; width: auto; display: block; opacity: 0.85; }
+    .footer-copy { font-size: 0.8125rem; margin: 0; color: rgba(255,255,255,0.25); }
 
-    /* ═══════════════════════════════ RESPONSIVE ══════════════════════════════ */
-    @media (max-width: 900px) {
-      .sections-grid { grid-template-columns: repeat(2, 1fr); }
-    }
+    @media (max-width: 900px) { .sections-grid { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 600px) {
       .sections-grid { grid-template-columns: 1fr; }
-      .hero-logo-text { font-size: 3.5rem; }
-      .hero-logo-dot { font-size: 4.5rem; }
-      .hero { padding: 4rem 1rem; min-height: 260px; }
-      .nav-list { gap: 0; }
-      .nav-link { padding: 0.4rem 0.5rem; font-size: 0.8125rem; }
+      .hero { padding: 3.5rem 1rem; min-height: 260px; }
+      .hero-logo-img { height: 72px; }
     }
   </style>
 </head>
 <body>
 
-<!-- ═══════════ HEADER ═══════════ -->
+<!-- ══ HEADER ══ -->
 <header class="header">
   <div class="header-inner">
     <a href="#" class="logo">
-      <span class="logo-text">نقطة</span>
-      <span class="logo-dot">·</span>
+      <!-- شعار نقطة SVG مضمّن -->
+      <svg class="logo-img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 90" role="img" aria-label="نقطة">
+        <path d="M290,12 C305,12 318,25 318,44 C318,63 305,76 290,76 C275,50 275,38 290,12Z" fill="#8dc63f"/>
+        <path d="M290,12 C275,38 275,50 290,76 C270,70 258,58 258,44 C258,30 270,18 290,12Z" fill="#5b9b1e"/>
+        <text x="248" y="52" font-family="Georgia,serif" font-size="50" font-weight="bold" fill="#ffffff" text-anchor="end" direction="rtl">نقطة</text>
+        <text x="248" y="70" font-family="Arial,sans-serif" font-size="13" fill="rgba(255,255,255,0.7)" text-anchor="end" direction="rtl">المجتمع العلمي العربي</text>
+      </svg>
     </a>
     <nav>
       <ul class="nav-list">
@@ -282,29 +163,28 @@
   </div>
 </header>
 
-<!-- ═══════════ HERO ═══════════ -->
+<!-- ══ HERO ══ -->
 <section class="hero">
-  <div class="hero-decor" aria-hidden="true">
-    <span></span><span></span><span></span>
-  </div>
+  <div class="hero-decor" aria-hidden="true"><span></span><span></span><span></span></div>
   <div class="hero-content">
     <div class="hero-logo">
-      <span class="hero-logo-text">نقطة</span>
-      <span class="hero-logo-dot">·</span>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 90" style="height:110px;width:auto;display:block;" role="img" aria-label="نقطة">
+        <path d="M290,12 C305,12 318,25 318,44 C318,63 305,76 290,76 C275,50 275,38 290,12Z" fill="#8dc63f"/>
+        <path d="M290,12 C275,38 275,50 290,76 C270,70 258,58 258,44 C258,30 270,18 290,12Z" fill="#5b9b1e"/>
+        <text x="248" y="52" font-family="Georgia,serif" font-size="50" font-weight="bold" fill="#ffffff" text-anchor="end" direction="rtl">نقطة</text>
+        <text x="248" y="70" font-family="Arial,sans-serif" font-size="13" fill="rgba(255,255,255,0.6)" text-anchor="end" direction="rtl">المجتمع العلمي العربي</text>
+      </svg>
     </div>
-    <p class="hero-tagline">مجلة علمية عربية</p>
-    <p class="hero-desc">نستكشف العلم بأسلوب عربي أصيل — من القطر ومن العالم</p>
+    <p class="hero-tagline">مجلة علمية عربية — علم في متناول الجميع</p>
   </div>
 </section>
 
-<!-- ═══════════ EDITOR NOTE ═══════════ -->
+<!-- ══ EDITOR NOTE ══ -->
 <section class="editor-note">
   <div class="editor-note-inner">
-    <div class="editor-label">
-      <span>✦</span> كلمة المدير
-    </div>
+    <div class="editor-label"><span>✦</span> كلمة المدير</div>
     <p class="editor-quote">
-      نعيش في زمن تتسارع فيه المعرفة العلمية بشكل غير مسبوق، وأصبح من الضروري أن يكون لنا — نحن العرب — حضور فاعل في هذا الحوار. نقطة لم تكن يوماً مجرد موقع لنقل الأخبار، بل هي محاولة صادقة لصنع ثقافة علمية حقيقية. هذا الأسبوع، نسألكم: ما السؤال العلمي الذي يشغل تفكيركم؟
+      نعيش في زمن تتسارع فيه المعرفة العلمية بشكل غير مسبوق، وأصبح من الضروري أن يكون لنا — نحن العرب — حضور فاعل في هذا الحوار. نقطة لم تكن يوماً مجرد موقع لنقل الأخبار، بل هي محاولة صادقة لصنع ثقافة علمية حقيقية.
     </p>
     <div class="editor-footer">
       <time class="editor-date">١٦ يونيو ٢٠٢٦</time>
@@ -313,97 +193,81 @@
   </div>
 </section>
 
-<!-- ═══════════ SECTIONS ═══════════ -->
-<section style="background: var(--bg);">
+<!-- ══ SECTIONS ══ -->
+<section style="background:var(--bg);">
   <div class="wrapper">
     <h2 class="section-headline">الأقسام</h2>
     <div class="sections-grid">
-
       <div class="section-card loqaymat">
         <div class="section-icon">💡</div>
         <h3 class="section-name">لقيمات</h3>
         <p class="section-desc">محتوى علمي خفيف وسهل الهضم لمن يريد البدء</p>
-        <span class="section-arrow">←</span>
+        <span class="section-arrow loqaymat">←</span>
       </div>
-
       <div class="section-card omk">
         <div class="section-icon">🔬</div>
         <h3 class="section-name">عمق</h3>
         <p class="section-desc">تحليلات معمّقة ومقالات علمية متخصصة</p>
-        <span class="section-arrow">←</span>
+        <span class="section-arrow omk">←</span>
       </div>
-
       <div class="section-card qatar">
         <div class="section-icon">🌐</div>
         <h3 class="section-name">من قطر</h3>
         <p class="section-desc">أخبار العلوم والتقنية القادمة من دولة قطر</p>
-        <span class="section-arrow">←</span>
+        <span class="section-arrow qatar">←</span>
       </div>
-
       <div class="section-card tahar">
         <div class="section-icon">🔍</div>
         <h3 class="section-name">تحرٍّ</h3>
         <p class="section-desc">نتحقق من صحة الأخبار العلمية المتداولة</p>
-        <span class="section-arrow">←</span>
+        <span class="section-arrow tahar">←</span>
       </div>
-
       <div class="section-card sira">
         <div class="section-icon">📖</div>
         <h3 class="section-name">سيرة ذاتية</h3>
         <p class="section-desc">نستحضر مسيرة العلماء العرب وإسهاماتهم</p>
-        <span class="section-arrow">←</span>
+        <span class="section-arrow sira">←</span>
       </div>
-
       <div class="section-card momar">
         <div class="section-icon">🏛</div>
         <h3 class="section-name">معمار</h3>
         <p class="section-desc">علوم المواد والهندسة المعمارية والبناء</p>
-        <span class="section-arrow">←</span>
+        <span class="section-arrow momar">←</span>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- ═══════════ ARTICLES ═══════════ -->
-<section style="background: var(--bg);">
+<!-- ══ ARTICLES ══ -->
+<section style="background:var(--bg);">
   <div class="wrapper">
     <h2 class="section-headline">أحدث المقالات</h2>
     <ul class="article-list">
-
       <li>
         <div class="article-card">
-          <div class="article-image-wrap">
-            <div class="article-image-placeholder">🧬</div>
-          </div>
+          <div class="article-image-placeholder">🧬</div>
           <div class="article-body">
             <span class="article-tag tag-omk">عمق</span>
             <h3 class="article-title">كيف تعمل الجينات في تحديد الشخصية؟</h3>
-            <p class="article-excerpt">اكتشف العلماء أن الجينات تلعب دوراً أكبر مما كنا نعتقد في تشكيل شخصية الإنسان، لكن البيئة لا تزال عاملاً محورياً لا يمكن تجاهله.</p>
+            <p class="article-excerpt">اكتشف العلماء أن الجينات تلعب دوراً أكبر مما كنا نعتقد في تشكيل شخصية الإنسان، لكن البيئة لا تزال عاملاً محورياً.</p>
             <time class="article-date">١٥ يونيو ٢٠٢٦</time>
           </div>
         </div>
       </li>
-
       <li>
         <div class="article-card">
-          <div class="article-image-wrap">
-            <div class="article-image-placeholder">🏗️</div>
-          </div>
+          <div class="article-image-placeholder">🏗️</div>
           <div class="article-body">
             <span class="article-tag tag-momar">معمار</span>
             <h3 class="article-title">الخرسانة الذاتية الإصلاح: مستقبل البناء المستدام</h3>
-            <p class="article-excerpt">تقنية جديدة تجمع بين البكتيريا والخرسانة لإنتاج مواد بناء قادرة على إصلاح شقوقها تلقائياً، مما يطيل عمر المباني ويقلل التكاليف.</p>
+            <p class="article-excerpt">تقنية جديدة تجمع بين البكتيريا والخرسانة لإنتاج مواد بناء قادرة على إصلاح شقوقها تلقائياً.</p>
             <time class="article-date">١٠ يونيو ٢٠٢٦</time>
           </div>
         </div>
       </li>
-
       <li>
         <div class="article-card">
-          <div class="article-image-wrap">
-            <div class="article-image-placeholder">⚗️</div>
-          </div>
+          <div class="article-image-placeholder">⚗️</div>
           <div class="article-body">
             <span class="article-tag tag-loqaymat">لقيمات</span>
             <h3 class="article-title">لماذا السماء زرقاء؟ تبسيط ظاهرة رايلي</h3>
@@ -412,60 +276,55 @@
           </div>
         </div>
       </li>
-
       <li>
         <div class="article-card">
-          <div class="article-image-wrap">
-            <div class="article-image-placeholder">🔎</div>
-          </div>
+          <div class="article-image-placeholder">🔎</div>
           <div class="article-body">
             <span class="article-tag tag-tahar">تحرٍّ</span>
             <h3 class="article-title">هل فعلاً نستخدم ١٠٪ فقط من دماغنا؟</h3>
-            <p class="article-excerpt">خرافة علمية انتشرت كالنار في الهشيم، نتتبع أصلها ونفنّد ما تقوله الأبحاث الحديثة عن نشاط الدماغ الحقيقي.</p>
+            <p class="article-excerpt">خرافة علمية انتشرت كالنار في الهشيم — نتتبع أصلها ونفنّد ما تقوله الأبحاث الحديثة.</p>
             <time class="article-date">١ يونيو ٢٠٢٦</time>
           </div>
         </div>
       </li>
-
       <li>
         <div class="article-card">
-          <div class="article-image-wrap">
-            <div class="article-image-placeholder">🌍</div>
-          </div>
+          <div class="article-image-placeholder">🌍</div>
           <div class="article-body">
             <span class="article-tag tag-qatar">من قطر</span>
             <h3 class="article-title">قطر تطلق أول قمر صناعي للرصد البيئي</h3>
-            <p class="article-excerpt">في خطوة علمية بارزة، أعلنت قطر عن إطلاق قمر صناعي متخصص في رصد التغيرات المناخية في منطقة الخليج العربي.</p>
-            <time class="article-date">28 مايو ٢٠٢٦</time>
+            <p class="article-excerpt">في خطوة علمية بارزة، أعلنت قطر عن إطلاق قمر صناعي متخصص في رصد التغيرات المناخية.</p>
+            <time class="article-date">٢٨ مايو ٢٠٢٦</time>
           </div>
         </div>
       </li>
-
       <li>
         <div class="article-card">
-          <div class="article-image-wrap">
-            <div class="article-image-placeholder">👩‍🔬</div>
-          </div>
+          <div class="article-image-placeholder">👩‍🔬</div>
           <div class="article-body">
             <span class="article-tag tag-sira">سيرة ذاتية</span>
             <h3 class="article-title">ابن الهيثم: أبو علم البصريات الحديث</h3>
-            <p class="article-excerpt">رحلة في حياة عالم عربي غيّر فهم البشرية للضوء والإبصار، وأرسى أسس المنهج التجريبي في العلم قبل أوروبا بقرون.</p>
+            <p class="article-excerpt">رحلة في حياة عالم عربي غيّر فهم البشرية للضوء والإبصار، وأرسى أسس المنهج التجريبي قبل أوروبا بقرون.</p>
             <time class="article-date">٢٠ مايو ٢٠٢٦</time>
           </div>
         </div>
       </li>
-
     </ul>
   </div>
 </section>
 
-<!-- ═══════════ FOOTER ═══════════ -->
+<!-- ══ FOOTER ══ -->
 <footer class="footer">
   <div class="footer-inner">
-    <div class="footer-logo">
-      <span>نقطة</span>
-      <span class="footer-dot">·</span>
-    </div>
+    <!-- شعار نقطة -->
+    <a href="#" class="logo">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 90" style="height:52px;width:auto;display:block;" role="img" aria-label="نقطة">
+        <path d="M290,12 C305,12 318,25 318,44 C318,63 305,76 290,76 C275,50 275,38 290,12Z" fill="#8dc63f"/>
+        <path d="M290,12 C275,38 275,50 290,76 C270,70 258,58 258,44 C258,30 270,18 290,12Z" fill="#5b9b1e"/>
+        <text x="248" y="52" font-family="Georgia,serif" font-size="50" font-weight="bold" fill="#ffffff" text-anchor="end" direction="rtl">نقطة</text>
+        <text x="248" y="70" font-family="Arial,sans-serif" font-size="13" fill="rgba(255,255,255,0.55)" text-anchor="end" direction="rtl">المجتمع العلمي العربي</text>
+      </svg>
+    </a>
     <p class="footer-tagline">مجلة علمية عربية — علم في متناول الجميع</p>
     <nav class="footer-nav">
       <a href="#">لقيمات</a>
@@ -475,6 +334,33 @@
       <a href="#">سيرة ذاتية</a>
       <a href="#">معمار</a>
     </nav>
+    <!-- بدعم من -->
+    <div class="footer-sponsor">
+      <span class="footer-sponsor-label">بدعم من</span>
+      <!-- شعار المدينة الإعلامية قطر -->
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 72" style="height:44px;width:auto;display:block;opacity:0.88;" role="img" aria-label="المدينة الإعلامية قطر">
+        <!-- Hexagonal geometric pattern -->
+        <g transform="translate(6,4) scale(0.85)">
+          <polygon points="26,0 36,17 16,17" fill="#1a1464"/>
+          <polygon points="46,0 56,17 36,17" fill="#00b4d0"/>
+          <polygon points="6,17 16,34 -4,34"  fill="#1a1464"/>
+          <polygon points="26,17 36,34 16,34" fill="#00b4d0"/>
+          <polygon points="46,17 56,34 36,34" fill="#1a1464"/>
+          <polygon points="66,17 76,34 56,34" fill="#00b4d0"/>
+          <polygon points="6,34 16,51 -4,51"  fill="#00b4d0"/>
+          <polygon points="26,34 36,51 16,51" fill="#1a1464"/>
+          <polygon points="46,34 56,51 36,51" fill="#00b4d0"/>
+          <polygon points="66,34 76,51 56,51" fill="#1a1464"/>
+          <polygon points="16,51 26,68 6,68"  fill="#1a1464"/>
+          <polygon points="36,51 46,68 26,68" fill="#00b4d0"/>
+          <polygon points="56,51 66,68 46,68" fill="#1a1464"/>
+        </g>
+        <!-- Text -->
+        <text x="98" y="20" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#ffffff" direction="rtl" text-anchor="start">المدينة الإعلامية</text>
+        <text x="98" y="40" font-family="Arial,sans-serif" font-size="15" font-weight="bold" fill="#ffffff">Media City</text>
+        <text x="98" y="58" font-family="Arial,sans-serif" font-size="13" fill="#00b4d0">Qatar  <tspan direction="rtl">قطر</tspan></text>
+      </svg>
+    </div>
     <p class="footer-copy">© 2026 مجلة نقطة العلمية</p>
   </div>
 </footer>

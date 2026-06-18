@@ -19,18 +19,16 @@
 
 .logo {
   display: flex;
-  align-items: baseline;
-  gap: 2px;
+  align-items: center;
   text-decoration: none;
   flex-shrink: 0;
 }
 
-.logoText {
-  font-family: 'Cairo', sans-serif;
-  font-size: 1.75rem;
-  font-weight: 900;
-  color: #ffffff;
-  letter-spacing: -0.5px;
+.logoImg {
+  height: 44px;
+  width: auto;
+  display: block;
+  filter: brightness(0) invert(1);
 }
 
 .logoDot {

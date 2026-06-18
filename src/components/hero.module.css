@@ -25,18 +25,11 @@
   margin-bottom: 0.75rem;
 }
 
-.heroLogoText {
-  font-size: 5rem;
-  font-weight: 900;
-  letter-spacing: -2px;
-  line-height: 1;
-  color: #fff;
-}
-
-.heroLogoDot {
-  font-size: 6rem;
-  color: #f4c430;
-  line-height: 0.8;
+.heroLogoImg {
+  height: 90px;
+  width: auto;
+  display: block;
+  filter: brightness(0) invert(1);
 }
 
 .heroTagline {

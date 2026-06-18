@@ -6,8 +6,7 @@ export default function Hero() {
     <div className={styles.hero}>
       <div className={styles.heroContent}>
         <div className={styles.heroLogo}>
-          <span className={styles.heroLogoText}>نقطة</span>
-          <span className={styles.heroLogoDot}>·</span>
+          <img src="/logo-nokta.svg" alt="نقطة" className={styles.heroLogoImg} />
         </div>
         <p className={styles.heroTagline}>مجلة علمية عربية</p>
         <p className={styles.heroDesc}>نستكشف العلم بأسلوب عربي أصيل — من القطر ومن العالم</p>

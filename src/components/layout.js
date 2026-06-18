@@ -14,8 +14,7 @@ export default function Layout({ children }) {
       <footer className={styles.footer}>
         <div className={styles.footerInner}>
           <Link to="/" className={styles.footerLogo}>
-            <span>نقطة</span>
-            <span className={styles.footerDot}>·</span>
+            <img src="/logo-nokta.svg" alt="نقطة" className={styles.footerLogoImg} />
           </Link>
           <p className={styles.footerTagline}>مجلة علمية عربية — علم في متناول الجميع</p>
           <nav className={styles.footerNav}>
@@ -26,6 +25,14 @@ export default function Layout({ children }) {
             <Link to="/section/sira/">سيرة ذاتية</Link>
             <Link to="/section/momar/">معمار</Link>
           </nav>
+          <div className={styles.footerSponsor}>
+            <span className={styles.footerSponsorLabel}>بدعم من</span>
+            <img
+              src="/logo-mediacityqatar.svg"
+              alt="المدينة الإعلامية قطر"
+              className={styles.footerSponsorLogo}
+            />
+          </div>
           <p className={styles.footerCopy}>
             © {new Date().getFullYear()} مجلة نقطة العلمية
           </p>
