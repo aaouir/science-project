@@ -1,0 +1,37 @@
+.hero {
+  padding: 4rem 1.5rem;
+  text-align: center;
+  color: #fff;
+}
+
+.hero_loqaymat { background: linear-gradient(135deg, #0369a1, #0284c7); }
+.hero_omk      { background: linear-gradient(135deg, #0f1f3d, #1e3a5f); }
+.hero_qatar    { background: linear-gradient(135deg, #7f1d1d, #991b1b); }
+.hero_tahar    { background: linear-gradient(135deg, #92400e, #b45309); }
+.hero_sira     { background: linear-gradient(135deg, #4c1d95, #6d28d9); }
+.hero_momar    { background: linear-gradient(135deg, #064e3b, #065f46); }
+
+.heroIcon {
+  display: block;
+  font-size: 3rem;
+  margin-bottom: 0.75rem;
+}
+
+.heroTitle {
+  font-size: 3rem;
+  font-weight: 900;
+  margin: 0 0 0.5rem;
+}
+
+.heroCount {
+  font-size: 0.9375rem;
+  margin: 0;
+  opacity: 0.65;
+}
+
+.empty {
+  text-align: center;
+  color: var(--text-muted);
+  padding: 4rem 0;
+  font-size: 1.125rem;
+}

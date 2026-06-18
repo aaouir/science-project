@@ -1,0 +1,25 @@
+.sectionsSection {
+  background: var(--bg);
+}
+
+.sectionsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+@media (max-width: 900px) {
+  .sectionsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .sectionsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.articlesSection {
+  background: var(--bg);
+}

@@ -4,21 +4,31 @@ import get from 'lodash/get'
 import { Helmet } from 'react-helmet'
 import Layout from '../components/layout'
 import ArticlePreview from '../components/article-preview'
-import styles from './blog.module.css'
+import styles from './section.module.css'
 
-class BlogIndex extends React.Component {
+const sectionMeta = {
+  loqaymat: { color: 'loqaymat', icon: '💡' },
+  omk:      { color: 'omk',      icon: '🔬' },
+  qatar:    { color: 'qatar',    icon: '🌐' },
+  tahar:    { color: 'tahar',    icon: '🔍' },
+  sira:     { color: 'sira',     icon: '📖' },
+  momar:    { color: 'momar',    icon: '🏛' },
+}
+
+class SectionTemplate extends React.Component {
   render() {
+    const { name, slug } = this.props.pageContext
     const siteTitle = get(this, 'props.data.site.siteMetadata.title')
     const posts = get(this, 'props.data.allContentfulBlogPost.edges') || []
+    const meta = sectionMeta[slug] || {}
 
     return (
-      <Layout location={this.props.location}>
-        <Helmet title={`جميع المقالات | ${siteTitle}`} />
-        <div className={styles.pageHero}>
-          <h1 className={styles.pageTitle}>جميع المقالات</h1>
-          <p className={styles.pageSubtitle}>
-            {posts.length} مقالة في أرشيف نقطة العلمية
-          </p>
+      <Layout>
+        <Helmet title={`${name} | ${siteTitle}`} />
+        <div className={`${styles.hero} ${styles[`hero_${meta.color}`]}`}>
+          <span className={styles.heroIcon}>{meta.icon}</span>
+          <h1 className={styles.heroTitle}>{name}</h1>
+          <p className={styles.heroCount}>{posts.length} مقالة</p>
         </div>
         <div className="wrapper">
           {posts.length > 0 ? (
@@ -30,9 +40,7 @@ class BlogIndex extends React.Component {
               ))}
             </ul>
           ) : (
-            <p style={{ textAlign: 'center', color: 'var(--text-muted)', padding: '4rem 0' }}>
-              لا توجد مقالات بعد.
-            </p>
+            <p className={styles.empty}>لا توجد مقالات في هذا القسم بعد.</p>
           )}
         </div>
       </Layout>
@@ -40,16 +48,19 @@ class BlogIndex extends React.Component {
   }
 }
 
-export default BlogIndex
+export default SectionTemplate
 
 export const pageQuery = graphql`
-  query BlogIndexQuery {
+  query SectionQuery($tag: String!) {
     site {
       siteMetadata {
         title
       }
     }
-    allContentfulBlogPost(sort: { fields: [publishDate], order: DESC }) {
+    allContentfulBlogPost(
+      filter: { tags: { in: [$tag] } }
+      sort: { fields: [publishDate], order: DESC }
+    ) {
       edges {
         node {
           title

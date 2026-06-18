@@ -1,10 +1,19 @@
-.hero {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 61.8vh;
-  max-height: 400px;
-  background: #e1e1e1;
-  font-size: 2em;
-  overflow: hidden;
+.pageHero {
+  background: linear-gradient(135deg, #0b0b1f 0%, #12122e 100%);
+  color: #fff;
+  padding: 4rem 1.5rem;
+  text-align: center;
+}
+
+.pageTitle {
+  font-size: 2.5rem;
+  font-weight: 900;
+  margin: 0 0 0.5rem;
+  color: #fff;
+}
+
+.pageSubtitle {
+  font-size: 1rem;
+  color: rgba(255,255,255,0.5);
+  margin: 0;
 }

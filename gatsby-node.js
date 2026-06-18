@@ -1,42 +1,55 @@
-const Promise = require('bluebird')
 const path = require('path')
 
-exports.createPages = ({ graphql, actions }) => {
+const SECTIONS = [
+  { slug: 'loqaymat', name: 'لقيمات', tag: 'لقيمات' },
+  { slug: 'omk',      name: 'عمق',    tag: 'عمق' },
+  { slug: 'qatar',    name: 'من قطر', tag: 'من قطر' },
+  { slug: 'tahar',    name: 'تحرٍّ',  tag: 'تحر' },
+  { slug: 'sira',     name: 'سيرة ذاتية', tag: 'سيرة ذاتية' },
+  { slug: 'momar',    name: 'معمار',  tag: 'معمار' },
+]
+
+exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
 
-  return new Promise((resolve, reject) => {
-    const blogPost = path.resolve('./src/templates/blog-post.js')
-    resolve(
-      graphql(
-        `
-          {
-            allContentfulBlogPost {
-              edges {
-                node {
-                  title
-                  slug
-                }
-              }
-            }
+  const result = await graphql(`
+    {
+      allContentfulBlogPost {
+        edges {
+          node {
+            title
+            slug
           }
-        `
-      ).then(result => {
-        if (result.errors) {
-          console.log(result.errors)
-          reject(result.errors)
         }
+      }
+    }
+  `)
 
-        const posts = result.data.allContentfulBlogPost.edges
-        posts.forEach(post => {
-          createPage({
-            path: `/blog/${post.node.slug}/`,
-            component: blogPost,
-            context: {
-              slug: post.node.slug,
-            },
-          })
-        })
-      })
-    )
+  if (result.errors) {
+    throw result.errors
+  }
+
+  const blogPost = path.resolve('./src/templates/blog-post.js')
+  result.data.allContentfulBlogPost.edges.forEach(({ node }) => {
+    createPage({
+      path: `/blog/${node.slug}/`,
+      component: blogPost,
+      context: {
+        slug: node.slug,
+      },
+    })
+  })
+
+  const sectionTemplate = path.resolve('./src/templates/section.js')
+  SECTIONS.forEach(section => {
+    createPage({
+      path: `/section/${section.slug}/`,
+      component: sectionTemplate,
+      context: {
+        slug: section.slug,
+        name: section.name,
+        tag: section.tag,
+      },
+    })
   })
 }

@@ -1,72 +1,99 @@
-@font-face {
-  font-family: "Avenir";
-  font-weight: 400;
-  font-style: normal;
-  src: url("/avenir-400.woff2") format("woff2");
-  font-display: swap;
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap');
+
+:root {
+  --nav-bg: #0b0b1f;
+  --bg: #f3f4f6;
+  --surface: #ffffff;
+  --accent: #e63946;
+  --text: #111827;
+  --text-muted: #6b7280;
+  --border: #e5e7eb;
+  --radius: 12px;
+  --shadow: 0 4px 24px rgba(0,0,0,0.08);
+  --shadow-hover: 0 8px 40px rgba(0,0,0,0.14);
+
+  --section-loqaymat: #0284c7;
+  --section-omk: #1e3a5f;
+  --section-qatar: #991b1b;
+  --section-tahar: #b45309;
+  --section-sira: #6d28d9;
+  --section-momar: #065f46;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  direction: rtl;
+  scroll-behavior: smooth;
 }
 
 body {
-  font-family: "Avenir", Tahoma, Arial, Helvetica, sans-serif;
-  font-size: 1em;
-  line-height: 1.65;
-  color: #373F49;
-  background: #eee;
+  font-family: 'Cairo', Tahoma, Arial, sans-serif;
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--text);
+  background: var(--bg);
   margin: 0;
+  -webkit-font-smoothing: antialiased;
 }
 
 img {
   display: block;
   width: 100%;
+  height: auto;
 }
 
-h1,
-h2,
-h3 {
-  font-size: 2em;
-  font-weight: normal;
+h1, h2, h3, h4, h5 {
+  font-weight: 700;
+  line-height: 1.3;
+  margin-top: 0;
 }
 
 a {
-  color: currentColor;
+  color: inherit;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+a:hover {
+  opacity: 0.75;
 }
 
 .wrapper {
-  width: calc(100% - 10vmin);
+  max-width: 1280px;
+  width: calc(100% - 3rem);
   margin: 0 auto;
-  padding: 5vmin 0;
+  padding: 3rem 0;
 }
 
-/**
- * article grid
- */
 .article-list {
   margin: 0;
   padding: 0;
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  grid-gap: 5vmin;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
 }
 
-/**
- *
- */
 .section-headline {
-  padding: 0 0 0.4em 0;
-  margin: 0 0 5vmin 0;
-  border-bottom: 1px solid #ddd;
+  font-size: 1.375rem;
+  font-weight: 700;
+  padding-bottom: 0.625rem;
+  margin: 0 0 2rem 0;
+  border-bottom: 3px solid var(--accent);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-/**
- *
- */
 .list-inline {
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-  .list-inline li {
-    display: inline-block;
-  }
+.list-inline li {
+  display: inline-block;
+}

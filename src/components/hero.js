@@ -1,19 +1,22 @@
 import React from 'react'
-import Img from 'gatsby-image'
-
 import styles from './hero.module.css'
 
-export default ({ data }) => (
-  <div className={styles.hero}>
-    <Img
-      className={styles.heroImage}
-      alt={data.name}
-      fluid={data.heroImage.fluid}
-    />
-    <div className={styles.heroDetails}>
-      <h3 className={styles.heroHeadline}>{data.name}</h3>
-      <p className={styles.heroTitle}>{data.title}</p>
-      <p>{data.shortBio.shortBio}</p>
+export default function Hero() {
+  return (
+    <div className={styles.hero}>
+      <div className={styles.heroContent}>
+        <div className={styles.heroLogo}>
+          <span className={styles.heroLogoText}>نقطة</span>
+          <span className={styles.heroLogoDot}>·</span>
+        </div>
+        <p className={styles.heroTagline}>مجلة علمية عربية</p>
+        <p className={styles.heroDesc}>نستكشف العلم بأسلوب عربي أصيل — من القطر ومن العالم</p>
+      </div>
+      <div className={styles.heroDecor} aria-hidden="true">
+        <span />
+        <span />
+        <span />
+      </div>
     </div>
-  </div>
-)
+  )
+}

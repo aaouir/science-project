@@ -36,9 +36,11 @@ if (!spaceId || !accessToken) {
 
 module.exports = {
   siteMetadata: {
-    title: "Gatsby Contentful starter",
+    title: "نقطة - مجلة علمية عربية",
+    description: "مجلة نقطة العلمية - علم في متناول الجميع",
+    siteUrl: "https://nok6a.net",
   },
-  pathPrefix: "/gatsby-contentful-starter",
+  pathPrefix: "/",
   plugins: [
     "gatsby-transformer-remark",
     "gatsby-transformer-sharp",

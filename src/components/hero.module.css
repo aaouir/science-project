@@ -1,47 +1,109 @@
 .hero {
-  position: relative;
-  background: #000;
+  background: linear-gradient(135deg, #0b0b1f 0%, #12122e 50%, #1a1040 100%);
   color: #fff;
+  position: relative;
+  overflow: hidden;
+  padding: 5rem 1.5rem;
   text-align: center;
+  min-height: 340px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.heroImage {
-  /*
-    Ensure golden ratio for the hero size while limiting it to some extend to
-    the viewport width
-  */
-  height: 61.8vh;
-  max-height: 400px;
+.heroContent {
+  position: relative;
+  z-index: 2;
+  max-width: 640px;
+  margin: 0 auto;
 }
 
-.heroDetails {
+.heroLogo {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+  margin-bottom: 0.75rem;
+}
+
+.heroLogoText {
+  font-size: 5rem;
+  font-weight: 900;
+  letter-spacing: -2px;
+  line-height: 1;
+  color: #fff;
+}
+
+.heroLogoDot {
+  font-size: 6rem;
+  color: #f4c430;
+  line-height: 0.8;
+}
+
+.heroTagline {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.85);
+  margin: 0 0 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.heroDesc {
+  font-size: 1.0625rem;
+  color: rgba(255,255,255,0.55);
+  margin: 0;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+/* Decorative circles */
+.heroDecor {
   position: absolute;
-  background: rgba(0, 0, 0, 0.7);
-  left: 50%;
-  bottom: 0;
-  transform: translate(-50%, 0);
-  font-size: 14px;
-  padding: 0 0.5em;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
 }
 
-@media(min-width: 600px) {
-  .heroDetails {
-    font-size: 16px;
+.heroDecor span {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(244,196,48,0.12);
+}
+
+.heroDecor span:nth-child(1) {
+  width: 400px;
+  height: 400px;
+  top: -120px;
+  left: -100px;
+}
+
+.heroDecor span:nth-child(2) {
+  width: 600px;
+  height: 600px;
+  bottom: -250px;
+  right: -200px;
+  border-color: rgba(255,255,255,0.05);
+}
+
+.heroDecor span:nth-child(3) {
+  width: 200px;
+  height: 200px;
+  top: 20px;
+  right: 10%;
+  border-color: rgba(244,196,48,0.08);
+}
+
+@media (max-width: 600px) {
+  .hero {
+    padding: 4rem 1rem;
+    min-height: 260px;
   }
-}
 
-@media(min-width: 1000px) {
-  .heroDetails {
-    font-size: 20px;
+  .heroLogoText {
+    font-size: 3.5rem;
   }
-}
 
-.heroHeadline {
-  margin: 0;
-}
-
-.heroTitle {
-  margin: 0;
-  font-size: 1.125em;
-  font-weight: bold;
+  .heroLogoDot {
+    font-size: 4.5rem;
+  }
 }
