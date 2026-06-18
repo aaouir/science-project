@@ -122,6 +122,38 @@
     .hero-decor span:nth-child(2) { width: 600px; height: 600px; bottom: -250px; right: -200px; border-color: rgba(255,255,255,0.05); }
     .hero-decor span:nth-child(3) { width: 200px; height: 200px; top: 20px; right: 10%; border-color: rgba(244,196,48,0.08); }
 
+    /* ═══════════ EDITOR NOTE ═══════════ */
+    .editor-note {
+      background: #0b0b1f;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .editor-note-inner {
+      max-width: 860px;
+      width: calc(100% - 3rem);
+      margin: 0 auto;
+      padding: 3rem 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+    .editor-label {
+      display: flex; align-items: center; gap: 0.5rem;
+      font-size: 0.8125rem; font-weight: 700;
+      color: #f4c430; letter-spacing: 0.08em;
+    }
+    .editor-quote {
+      margin: 0; padding: 0; border: none;
+      font-size: 1.1875rem;
+      line-height: 1.85;
+      color: rgba(255,255,255,0.82);
+      font-style: normal;
+    }
+    .editor-quote::before { content: '"'; font-size: 1.5em; color: #f4c430; line-height: 0; vertical-align: -0.35em; margin-left: 0.2em; }
+    .editor-quote::after  { content: '"'; font-size: 1.5em; color: #f4c430; line-height: 0; vertical-align: -0.35em; margin-right: 0.2em; }
+    .editor-footer { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+    .editor-date  { font-size: 0.875rem; color: rgba(255,255,255,0.3); }
+    .editor-more  { font-size: 0.875rem; font-weight: 700; color: #f4c430; cursor: pointer; }
+
     /* ═══════════════════════════════ WRAPPER ══════════════════════════════ */
     .wrapper { max-width: 1280px; width: calc(100% - 3rem); margin: 0 auto; padding: 3rem 0; }
     .section-headline {
@@ -262,6 +294,22 @@
     </div>
     <p class="hero-tagline">مجلة علمية عربية</p>
     <p class="hero-desc">نستكشف العلم بأسلوب عربي أصيل — من القطر ومن العالم</p>
+  </div>
+</section>
+
+<!-- ═══════════ EDITOR NOTE ═══════════ -->
+<section class="editor-note">
+  <div class="editor-note-inner">
+    <div class="editor-label">
+      <span>✦</span> كلمة المدير
+    </div>
+    <p class="editor-quote">
+      نعيش في زمن تتسارع فيه المعرفة العلمية بشكل غير مسبوق، وأصبح من الضروري أن يكون لنا — نحن العرب — حضور فاعل في هذا الحوار. نقطة لم تكن يوماً مجرد موقع لنقل الأخبار، بل هي محاولة صادقة لصنع ثقافة علمية حقيقية. هذا الأسبوع، نسألكم: ما السؤال العلمي الذي يشغل تفكيركم؟
+    </p>
+    <div class="editor-footer">
+      <time class="editor-date">١٦ يونيو ٢٠٢٦</time>
+      <a class="editor-more">قراءة المزيد ←</a>
+    </div>
   </div>
 </section>
 

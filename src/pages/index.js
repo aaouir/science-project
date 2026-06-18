@@ -6,6 +6,7 @@ import Layout from '../components/layout'
 import Hero from '../components/hero'
 import ArticlePreview from '../components/article-preview'
 import SectionCard from '../components/section-card'
+import EditorNote from '../components/editor-note'
 import styles from './index.module.css'
 
 const sections = [
@@ -57,11 +58,14 @@ class RootIndex extends React.Component {
   render() {
     const siteTitle = get(this, 'props.data.site.siteMetadata.title')
     const posts = get(this, 'props.data.allContentfulBlogPost.edges') || []
+    const editorNoteEdges = get(this, 'props.data.editorNote.edges') || []
+    const editorNote = editorNoteEdges.length > 0 ? editorNoteEdges[0].node : null
 
     return (
       <Layout location={this.props.location}>
         <Helmet title={siteTitle} />
         <Hero />
+        <EditorNote note={editorNote} />
 
         <section className={styles.sectionsSection}>
           <div className="wrapper">
@@ -100,6 +104,24 @@ export const pageQuery = graphql`
     site {
       siteMetadata {
         title
+      }
+    }
+    editorNote: allContentfulBlogPost(
+      filter: { tags: { in: ["كلمة المدير"] } }
+      sort: { fields: [publishDate], order: DESC }
+      limit: 1
+    ) {
+      edges {
+        node {
+          title
+          slug
+          publishDate(formatString: "D MMMM YYYY", locale: "ar")
+          description {
+            childMarkdownRemark {
+              html
+            }
+          }
+        }
       }
     }
     allContentfulBlogPost(
