@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>الأرشيف الفلسطيني — معاينة التصميم</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Noto+Sans+Arabic:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --olive:#2D4A27; --olive-l:#3E6335; --olive-d:#1A2E18;
+  --cream:#F5F0E8; --cream-d:#EAE3D2;
+  --gold:#C9A84C;  --gold-l:#DFC06F;
+  --brown:#3D2B1F; --brown-l:#5C4033;
+  --text:#2A2018;  --muted:#6B5B4E;
+  --border:#D5C9B4;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;scroll-behavior:smooth}
+body{font-family:'Amiri',serif;background:var(--cream);color:var(--text);direction:rtl;line-height:1.8}
+a{color:var(--olive);text-decoration:none}
+a:hover{color:var(--gold)}
+img{max-width:100%;display:block}
+.container{max-width:1200px;margin:0 auto;padding:0 1.5rem}
+
+/* TOP BAR */
+.top-bar{background:var(--brown);color:rgba(245,240,232,.7);font-size:.78rem;padding:.4rem 0;font-family:'Noto Sans Arabic',sans-serif}
+.top-bar .container{display:flex;justify-content:space-between;align-items:center}
+.lang-btns{display:flex;gap:.4rem}
+.lang-btns button{background:transparent;border:1px solid var(--gold);color:var(--gold-l);padding:.18rem .55rem;border-radius:3px;cursor:pointer;font-size:.72rem;font-family:'Noto Sans Arabic',sans-serif;transition:.2s}
+.lang-btns button.active,.lang-btns button:hover{background:var(--gold);color:var(--brown)}
+
+/* HEADER */
+header{background:var(--olive);position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.25)}
+.hdr{display:flex;align-items:center;justify-content:space-between;padding:.85rem 0;gap:1rem}
+.brand{display:flex;align-items:center;gap:.85rem}
+.logo{width:50px;height:50px;border-radius:50%;border:2px solid var(--gold);background:var(--olive-d);display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0}
+.brand-text a{color:#fff;font-size:1.25rem;font-weight:700;display:block;line-height:1.2}
+.brand-text span{color:var(--gold-l);font-size:.72rem;font-family:'Noto Sans Arabic',sans-serif}
+nav{display:flex;gap:.15rem}
+nav a{color:rgba(245,240,232,.9);padding:.45rem .8rem;border-radius:5px;font-size:.88rem;font-family:'Noto Sans Arabic',sans-serif;transition:.2s;white-space:nowrap}
+nav a:hover,nav a.active{background:rgba(201,168,76,.2);color:var(--gold-l)}
+.search-box{display:flex;align-items:center;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:25px;padding:.28rem .28rem .28rem .85rem;gap:.35rem}
+.search-box input{background:transparent;border:none;outline:none;color:#fff;font-size:.82rem;width:160px;font-family:'Noto Sans Arabic',sans-serif}
+.search-box input::placeholder{color:rgba(255,255,255,.45)}
+.search-box button{background:var(--gold);border:none;border-radius:20px;width:30px;height:30px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--brown);font-size:.9rem}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,var(--olive-d) 0%,var(--olive) 55%,var(--brown) 100%);color:#fff;padding:4.5rem 0 3.5rem;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23C9A84C' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E")}
+.hero-map{position:absolute;left:3%;top:50%;transform:translateY(-50%);opacity:.07;width:240px}
+.hero-map svg{fill:#fff;width:100%;height:auto}
+.hero-inner{position:relative;z-index:2;max-width:680px}
+.eyebrow{display:inline-block;background:rgba(201,168,76,.2);border:1px solid rgba(201,168,76,.45);color:var(--gold);padding:.28rem .95rem;border-radius:100px;font-size:.82rem;font-family:'Noto Sans Arabic',sans-serif;margin-bottom:1.1rem}
+.hero h1{font-size:clamp(2rem,4.5vw,3rem);line-height:1.25;margin-bottom:.9rem;text-shadow:0 2px 8px rgba(0,0,0,.3)}
+.hero h1 span{color:var(--gold)}
+.hero-sub{font-size:1rem;color:rgba(255,255,255,.82);max-width:500px;margin-bottom:1.8rem;line-height:1.75}
+.hero-actions{display:flex;gap:.85rem;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:.45rem;padding:.7rem 1.6rem;border-radius:30px;font-size:.88rem;font-family:'Noto Sans Arabic',sans-serif;font-weight:700;cursor:pointer;border:2px solid transparent;transition:.25s}
+.btn-gold{background:var(--gold);color:var(--brown);border-color:var(--gold)}
+.btn-gold:hover{background:var(--gold-l);transform:translateY(-2px);box-shadow:0 6px 20px rgba(201,168,76,.4)}
+.btn-outline{background:transparent;color:#fff;border-color:rgba(255,255,255,.45)}
+.btn-outline:hover{background:rgba(255,255,255,.1);border-color:#fff}
+.hero-stats{display:flex;gap:2.5rem;margin-top:2.5rem;padding-top:1.75rem;border-top:1px solid rgba(201,168,76,.3)}
+.stat-num{display:block;font-size:2rem;font-weight:700;color:var(--gold);line-height:1}
+.stat-lbl{font-size:.78rem;color:rgba(255,255,255,.6);font-family:'Noto Sans Arabic',sans-serif;margin-top:.2rem}
+
+/* SECTIONS */
+.section{padding:2.5rem 0}
+.section-alt{background:var(--cream-d)}
+.sec-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.75rem;padding-bottom:.8rem;border-bottom:2px solid var(--border)}
+.sec-head h2{font-size:1.4rem;color:var(--brown);position:relative;padding-bottom:.8rem}
+.sec-head h2::after{content:'';position:absolute;bottom:-calc(.8rem+2px);right:0;width:55px;height:3px;background:var(--gold);border-radius:2px}
+.see-all{font-size:.8rem;color:var(--muted);border:1px solid var(--border);padding:.28rem .75rem;border-radius:20px;font-family:'Noto Sans Arabic',sans-serif;transition:.2s}
+.see-all:hover{background:var(--olive);color:#fff;border-color:var(--olive)}
+
+/* CATEGORY CARDS */
+.cat-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1.1rem}
+.cat-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:1.6rem 1rem;text-align:center;transition:.25s;cursor:pointer}
+.cat-card:hover{border-color:var(--gold);box-shadow:0 4px 16px rgba(0,0,0,.1);transform:translateY(-4px)}
+.cat-icon{font-size:2.1rem;margin-bottom:.65rem;display:block}
+.cat-name{font-size:.95rem;font-weight:700;color:var(--brown);display:block;margin-bottom:.3rem}
+.cat-count{font-size:.75rem;color:var(--muted);font-family:'Noto Sans Arabic',sans-serif}
+
+/* DOCUMENT CARDS */
+.docs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.doc-card{background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:.25s;display:flex;flex-direction:column}
+.doc-card:hover{box-shadow:0 4px 20px rgba(0,0,0,.12);border-color:var(--gold);transform:translateY(-3px)}
+.doc-thumb{aspect-ratio:16/9;overflow:hidden;background:var(--cream-d);position:relative}
+.doc-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease}
+.doc-card:hover .doc-thumb img{transform:scale(1.05)}
+.badge{position:absolute;top:.65rem;right:.65rem;background:var(--olive);color:var(--gold-l);font-size:.68rem;font-family:'Noto Sans Arabic',sans-serif;padding:.18rem .55rem;border-radius:3px;font-weight:700}
+.doc-body{padding:1.15rem;flex:1;display:flex;flex-direction:column}
+.doc-meta{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:.6rem}
+.meta{display:inline-flex;align-items:center;gap:.22rem;background:var(--cream-d);border-radius:100px;padding:.22rem .65rem;font-size:.72rem;color:var(--brown);font-family:'Noto Sans Arabic',sans-serif}
+.doc-body h3{font-size:.97rem;margin-bottom:.45rem;flex:1;color:var(--brown)}
+.doc-body h3 a{color:inherit}
+.doc-body h3 a:hover{color:var(--olive)}
+.doc-excerpt{font-size:.82rem;color:var(--muted);line-height:1.65;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.doc-foot{padding:.8rem 1.15rem;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;font-size:.75rem;font-family:'Noto Sans Arabic',sans-serif}
+.doc-foot time{color:var(--muted)}
+.doc-foot a{color:var(--olive);font-weight:700}
+
+/* FEATURED BANNER */
+.banner{background:linear-gradient(to left,var(--olive-d),var(--brown));border-radius:12px;padding:2.25rem 2rem;display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:center;margin:2rem 0;color:#fff}
+.banner h3{color:var(--gold);font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;font-family:'Noto Sans Arabic',sans-serif;margin-bottom:.5rem}
+.banner h2{color:#fff;font-size:1.45rem;margin-bottom:.65rem}
+.banner p{color:rgba(245,240,232,.75);font-size:.88rem;line-height:1.7}
+.banner-img{width:180px;height:130px;object-fit:cover;border-radius:8px;border:2px solid rgba(201,168,76,.3)}
+
+/* PHOTOS GRID */
+.photo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+
+/* FOOTER */
+footer{background:var(--brown);color:rgba(245,240,232,.75);margin-top:3rem}
+.foot-top{padding:3rem 0 2.5rem;display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:2.5rem;border-bottom:1px solid rgba(255,255,255,.08)}
+.foot-col h4{color:var(--gold-l);font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;font-family:'Noto Sans Arabic',sans-serif;margin-bottom:.9rem}
+.foot-col h3{color:var(--gold);font-size:1.15rem;margin-bottom:.65rem}
+.foot-col p{font-size:.83rem;line-height:1.7;color:rgba(245,240,232,.65)}
+.foot-col ul{list-style:none;padding:0}
+.foot-col ul li{padding:.38rem 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:.83rem}
+.foot-col ul li a{color:rgba(245,240,232,.6);transition:.2s}
+.foot-col ul li a:hover{color:var(--gold-l)}
+.foot-bottom{padding:1.15rem 0;display:flex;align-items:center;justify-content:space-between;font-size:.75rem;color:rgba(245,240,232,.4);font-family:'Noto Sans Arabic',sans-serif;flex-wrap:wrap;gap:.5rem}
+.foot-links{display:flex;gap:1.25rem}
+.foot-links a{color:rgba(245,240,232,.5)}
+.foot-links a:hover{color:var(--gold-l)}
+.social{display:flex;gap:.6rem;margin-top:.85rem}
+.social a{width:32px;height:32px;background:rgba(255,255,255,.08);border-radius:50%;display:flex;align-items:center;justify-content:center;color:rgba(245,240,232,.7);font-size:.8rem;transition:.2s;border:1px solid rgba(255,255,255,.1)}
+.social a:hover{background:var(--gold);color:var(--brown)}
+
+/* PLACEHOLDER IMAGES */
+.img-ph{width:100%;height:100%;background:linear-gradient(135deg,var(--cream-d),var(--border));display:flex;align-items:center;justify-content:center;font-size:2.5rem}
+.ph-sm{aspect-ratio:16/9;background:linear-gradient(135deg,#e0d8c8,#c8bfa8);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:2rem}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  <div class="container">
+    <span>أرشيف رقمي لحفظ التاريخ والذاكرة الفلسطينية</span>
+    <div class="lang-btns">
+      <button class="active">عربي</button>
+      <button>EN</button>
+    </div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="container">
+    <div class="hdr">
+      <div class="brand">
+        <div class="logo">🏛</div>
+        <div class="brand-text">
+          <a href="#">الأرشيف الفلسطيني</a>
+          <span>Palestinian Archive</span>
+        </div>
+      </div>
+      <nav>
+        <a href="#" class="active">الرئيسية</a>
+        <a href="#">الوثائق</a>
+        <a href="#">الصور</a>
+        <a href="#">الفيديوهات</a>
+        <a href="#">الشهادات</a>
+        <a href="#">الشخصيات</a>
+        <a href="#">عن الأرشيف</a>
+      </nav>
+      <div class="search-box">
+        <input type="text" placeholder="ابحث في الأرشيف...">
+        <button>🔍</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-map">
+    <svg viewBox="0 0 200 350" xmlns="http://www.w3.org/2000/svg">
+      <path d="M100 10 C120 15,145 25,155 40 C165 55,160 70,158 85 C170 90,175 105,170 118 C165 130,150 135,148 150 C165 155,168 175,160 188 C152 200,135 200,130 215 C125 230,130 250,120 265 C110 280,90 285,85 300 C80 315,90 330,85 340 C75 330,65 310,60 295 C55 280,65 265,58 250 C50 235,35 230,30 215 C25 200,35 185,38 170 C40 155,30 142,35 128 C40 114,55 110,60 96 C45 90,42 70,50 58 C58 46,75 42,85 32 Z"/>
+    </svg>
+  </div>
+  <div class="container">
+    <div class="hero-inner">
+      <span class="eyebrow">🏛 الأرشيف الفلسطيني الرقمي</span>
+      <h1>حافظوا على الذاكرة<br><span>فإن الذاكرة هوية</span></h1>
+      <p class="hero-sub">أرشيف رقمي شامل يضم الوثائق التاريخية والصور والشهادات الشفهية لتوثيق التاريخ الفلسطيني وحفظه للأجيال القادمة.</p>
+      <div class="hero-actions">
+        <a href="#" class="btn btn-gold">📄 تصفح الوثائق</a>
+        <a href="#" class="btn btn-outline">🖼 الأرشيف المصور</a>
+      </div>
+      <div class="hero-stats">
+        <div><span class="stat-num">٤٨٢</span><span class="stat-lbl">📄 وثيقة</span></div>
+        <div><span class="stat-num">١٢٠٧</span><span class="stat-lbl">🖼 صورة</span></div>
+        <div><span class="stat-num">٩٤</span><span class="stat-lbl">🎬 فيديو</span></div>
+        <div><span class="stat-num">٢١٨</span><span class="stat-lbl">🎙 شهادة</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<section class="section">
+  <div class="container">
+    <div class="sec-head">
+      <h2>أقسام الأرشيف</h2>
+    </div>
+    <div class="cat-grid">
+      <a href="#" class="cat-card">
+        <span class="cat-icon">📄</span>
+        <span class="cat-name">الوثائق التاريخية</span>
+        <span class="cat-count">٤٨٢ وثيقة</span>
+      </a>
+      <a href="#" class="cat-card">
+        <span class="cat-icon">🖼</span>
+        <span class="cat-name">الأرشيف المصور</span>
+        <span class="cat-count">١٢٠٧ صورة</span>
+      </a>
+      <a href="#" class="cat-card">
+        <span class="cat-icon">🎬</span>
+        <span class="cat-name">أرشيف الفيديو</span>
+        <span class="cat-count">٩٤ فيديو</span>
+      </a>
+      <a href="#" class="cat-card">
+        <span class="cat-icon">🎙</span>
+        <span class="cat-name">الشهادات الشفهية</span>
+        <span class="cat-count">٢١٨ شهادة</span>
+      </a>
+      <a href="#" class="cat-card">
+        <span class="cat-icon">👤</span>
+        <span class="cat-name">الشخصيات</span>
+        <span class="cat-count">١٤٣ شخصية</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- LATEST DOCUMENTS -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="sec-head">
+      <h2>أحدث الوثائق</h2>
+      <a href="#" class="see-all">عرض الكل ←</a>
+    </div>
+    <div class="docs-grid">
+
+      <article class="doc-card">
+        <div class="doc-thumb">
+          <div class="img-ph">📜</div>
+          <span class="badge">وثيقة رسمية</span>
+        </div>
+        <div class="doc-body">
+          <div class="doc-meta">
+            <span class="meta">📅 ١٩٤٧</span>
+            <span class="meta">📍 القدس</span>
+            <span class="meta">🏺 ما قبل النكبة</span>
+          </div>
+          <h3><a href="#">وثيقة تقسيم فلسطين — قرار الأمم المتحدة ١٨١</a></h3>
+          <p class="doc-excerpt">نص قرار الجمعية العامة للأمم المتحدة الصادر في نوفمبر ١٩٤٧ والقاضي بتقسيم فلسطين إلى دولتين عربية ويهودية...</p>
+        </div>
+        <div class="doc-foot">
+          <time>١٥ نوفمبر ١٩٤٧</time>
+          <a href="#">عرض الوثيقة ←</a>
+        </div>
+      </article>
+
+      <article class="doc-card">
+        <div class="doc-thumb">
+          <div class="img-ph">🗺</div>
+          <span class="badge">خريطة</span>
+        </div>
+        <div class="doc-body">
+          <div class="doc-meta">
+            <span class="meta">📅 ١٩٤٨</span>
+            <span class="meta">📍 حيفا</span>
+            <span class="meta">🏺 النكبة</span>
+          </div>
+          <h3><a href="#">خرائط القرى الفلسطينية المُهجَّرة عام ١٩٤٨</a></h3>
+          <p class="doc-excerpt">مجموعة خرائط توثّق مواقع القرى الفلسطينية التي هُجِّر سكانها خلال حرب عام ١٩٤٨، مع بيانات السكان والملكية...</p>
+        </div>
+        <div class="doc-foot">
+          <time>٣ مايو ١٩٤٨</time>
+          <a href="#">عرض الوثيقة ←</a>
+        </div>
+      </article>
+
+      <article class="doc-card">
+        <div class="doc-thumb">
+          <div class="img-ph">✉️</div>
+          <span class="badge">رسالة</span>
+        </div>
+        <div class="doc-body">
+          <div class="doc-meta">
+            <span class="meta">📅 ١٩٦٧</span>
+            <span class="meta">📍 رام الله</span>
+            <span class="meta">🏺 ما بعد النكسة</span>
+          </div>
+          <h3><a href="#">مراسلات لجنة الأمم المتحدة حول وضع اللاجئين الفلسطينيين</a></h3>
+          <p class="doc-excerpt">وثائق دبلوماسية تتضمن مراسلات بين وكالة الأونروا والأمم المتحدة حول أوضاع اللاجئين الفلسطينيين عقب حرب ١٩٦٧...</p>
+        </div>
+        <div class="doc-foot">
+          <time>٢٢ يونيو ١٩٦٧</time>
+          <a href="#">عرض الوثيقة ←</a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- PHOTOS SECTION -->
+<section class="section">
+  <div class="container">
+    <div class="sec-head">
+      <h2>من الأرشيف المصور</h2>
+      <a href="#" class="see-all">عرض الكل ←</a>
+    </div>
+    <div class="photo-grid">
+      <article class="doc-card">
+        <div class="doc-thumb"><div class="img-ph">🕌</div><span class="badge">صورة</span></div>
+        <div class="doc-body">
+          <div class="doc-meta"><span class="meta">📅 ١٩٣٥</span><span class="meta">📍 يافا</span></div>
+          <h3><a href="#">سوق يافا القديم — صورة نادرة</a></h3>
+        </div>
+      </article>
+      <article class="doc-card">
+        <div class="doc-thumb"><div class="img-ph">🏘</div><span class="badge">صورة</span></div>
+        <div class="doc-body">
+          <div class="doc-meta"><span class="meta">📅 ١٩٤٢</span><span class="meta">📍 حيفا</span></div>
+          <h3><a href="#">حارة العرب في حيفا قبل النكبة</a></h3>
+        </div>
+      </article>
+      <article class="doc-card">
+        <div class="doc-thumb"><div class="img-ph">🌿</div><span class="badge">صورة</span></div>
+        <div class="doc-body">
+          <div class="doc-meta"><span class="meta">📅 ١٩٥٠</span><span class="meta">📍 الجليل</span></div>
+          <h3><a href="#">مخيم اللاجئين في منطقة الجليل</a></h3>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONY BANNER -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="banner">
+      <div>
+        <h3>شهادة اليوم</h3>
+        <h2>رواية أم كامل — لاجئة من قرية الدامون</h2>
+        <p>«كنا نيام حين سمعنا أصوات القنابل... قالت لنا الجيران إننا سنعود بعد أيام، لكننا لم نعد أبداً. كل ما أحمله من وطني هو مفتاح البيت وحفنة من تراب الزيتون...»</p>
+        <a href="#" class="btn btn-outline" style="margin-top:1.1rem;display:inline-flex">اقرأ الشهادة كاملة ←</a>
+      </div>
+      <div class="ph-sm" style="width:180px;height:140px;flex-shrink:0">🎙</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="foot-top">
+      <div class="foot-col">
+        <h3>الأرشيف الفلسطيني</h3>
+        <p>أرشيف رقمي شامل يحفظ الوثائق والصور والشهادات الفلسطينية للأجيال القادمة.</p>
+        <div class="social">
+          <a href="#">𝕏</a><a href="#">f</a><a href="#">▶</a><a href="#">◎</a>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h4>أقسام الأرشيف</h4>
+        <ul>
+          <li><a href="#">الوثائق التاريخية</a></li>
+          <li><a href="#">الأرشيف المصور</a></li>
+          <li><a href="#">أرشيف الفيديو</a></li>
+          <li><a href="#">الشهادات الشفهية</a></li>
+          <li><a href="#">الشخصيات</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>الحقب التاريخية</h4>
+        <ul>
+          <li><a href="#">ما قبل النكبة (قبل ١٩٤٨)</a></li>
+          <li><a href="#">النكبة (١٩٤٨)</a></li>
+          <li><a href="#">ما بين النكبتين</a></li>
+          <li><a href="#">النكسة (١٩٦٧)</a></li>
+          <li><a href="#">الانتفاضة الأولى</a></li>
+          <li><a href="#">المرحلة المعاصرة</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>عن الأرشيف</h4>
+        <ul>
+          <li><a href="#">من نحن</a></li>
+          <li><a href="#">المساهمة في الأرشيف</a></li>
+          <li><a href="#">سياسة الاستخدام</a></li>
+          <li><a href="#">اتصل بنا</a></li>
+          <li><a href="#">سياسة الخصوصية</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2024 الأرشيف الفلسطيني — جميع الحقوق محفوظة</span>
+      <nav class="foot-links">
+        <a href="#">الخصوصية</a>
+        <a href="#">الشروط</a>
+        <a href="#">خريطة الموقع</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
