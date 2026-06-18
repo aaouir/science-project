@@ -1,11 +1,183 @@
-# Palestinian Archive Arabic Translation
-# Copyright (C) 2024
+# Palestinian Archive Theme - Arabic Translation
+# Copyright (C) 2024 Palestinian Archive Project
+# This file is distributed under the same license as the Palestinian Archive theme.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: Palestinian Archive 1.0.0\n"
+"Report-Msgid-Bugs-To: https://example.com/contact\n"
 "POT-Creation-Date: 2024-01-01 00:00+0000\n"
+"PO-Revision-Date: 2024-01-01 00:00+0000\n"
+"Last-Translator: Palestinian Archive Project\n"
+"Language-Team: Arabic\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=6; plural=n==0?0:n==1?1:n==2?2:n%100>=3&&n%100<=10?3:n%100>=11&&n%100<=99?4:5;\n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5);\n"
+
+msgid "الرئيسية"
+msgstr "الرئيسية"
+
+msgid "الوثائق التاريخية"
+msgstr "الوثائق التاريخية"
+
+msgid "الأرشيف الفوتوغرافي"
+msgstr "الأرشيف الفوتوغرافي"
+
+msgid "الشهادات الشفهية"
+msgstr "الشهادات الشفهية"
+
+msgid "الأحداث التاريخية"
+msgstr "الأحداث التاريخية"
+
+msgid "الخريطة الجغرافية"
+msgstr "الخريطة الجغرافية"
+
+msgid "بحث في الأرشيف"
+msgstr "بحث في الأرشيف"
+
+msgid "ابحث في الأرشيف... / Search the archive..."
+msgstr "ابحث في الأرشيف..."
+
+msgid "تصفية:"
+msgstr "تصفية:"
+
+msgid "الحقبة التاريخية"
+msgstr "الحقبة التاريخية"
+
+msgid "الموقع الجغرافي"
+msgstr "الموقع الجغرافي"
+
+msgid "الموضوع"
+msgstr "الموضوع"
+
+msgid "إعادة ضبط الفلتر"
+msgstr "إعادة ضبط الفلتر"
+
+msgid "لا توجد نتائج / No results found"
+msgstr "لا توجد نتائج"
+
+msgid "جارٍ التحميل... / Loading..."
+msgstr "جارٍ التحميل..."
+
+msgid "إغلاق / Close"
+msgstr "إغلاق"
+
+msgid "عرض الوثيقة"
+msgstr "عرض الوثيقة"
+
+msgid "قراءة المزيد"
+msgstr "قراءة المزيد"
+
+msgid "اقرأ المزيد &hellip;"
+msgstr "اقرأ المزيد…"
+
+msgid "تصفح الأرشيف"
+msgstr "تصفح الأرشيف"
+
+msgid "تعرف علينا"
+msgstr "تعرف علينا"
+
+msgid "أرشيف الذاكرة الفلسطينية"
+msgstr "أرشيف الذاكرة الفلسطينية"
+
+msgid "حفظ التراث والتاريخ الفلسطيني للأجيال القادمة"
+msgstr "حفظ التراث والتاريخ الفلسطيني للأجيال القادمة"
+
+msgid "تخطى إلى المحتوى / Skip to content"
+msgstr "تخطى إلى المحتوى"
+
+msgid "مسار التنقل"
+msgstr "مسار التنقل"
+
+msgid "نتائج البحث عن: %s"
+msgstr "نتائج البحث عن: %s"
+
+msgid "الصفحة غير موجودة"
+msgstr "الصفحة غير موجودة"
+
+msgid "عذراً، الصفحة التي تبحث عنها غير موجودة."
+msgstr "عذراً، الصفحة التي تبحث عنها غير موجودة."
+
+msgid "التاريخ الأصلي / Original Date"
+msgstr "التاريخ الأصلي"
+
+msgid "المؤسسة المصدر / Source Institution"
+msgstr "المؤسسة المصدر"
+
+msgid "لغة الوثيقة / Document Language"
+msgstr "لغة الوثيقة"
+
+msgid "رقم الملف المرجعي / File Reference"
+msgstr "رقم الملف المرجعي"
+
+msgid "النص المكتوب / Transcription"
+msgstr "النص المكتوب"
+
+msgid "الترجمة الإنجليزية / English Translation"
+msgstr "الترجمة الإنجليزية"
+
+msgid "اسم الشاهد / Speaker Name"
+msgstr "اسم الشاهد"
+
+msgid "سنة الميلاد / Birth Year"
+msgstr "سنة الميلاد"
+
+msgid "القرية / Village of Origin"
+msgstr "القرية / بلدة المنشأ"
+
+msgid "تاريخ المقابلة / Interview Date"
+msgstr "تاريخ المقابلة"
+
+msgid "المحاور / Interviewer"
+msgstr "المحاور"
+
+msgid "%d نتيجة"
+msgstr "%d نتيجة"
+
+msgid "© %1$s %2$s — جميع الحقوق محفوظة"
+msgstr "© %1$s %2$s — جميع الحقوق محفوظة"
+
+msgid "من نحن"
+msgstr "من نحن"
+
+msgid "المساهمة في الأرشيف"
+msgstr "المساهمة في الأرشيف"
+
+msgid "سياسة الخصوصية"
+msgstr "سياسة الخصوصية"
+
+msgid "اتصل بنا"
+msgstr "اتصل بنا"
+
+#: inc/custom-post-types.php
+msgid "الوثائق / Documents"
+msgstr "الوثائق"
+
+msgid "الصور / Photos"
+msgstr "الصور"
+
+msgid "الشهادات / Testimonies"
+msgstr "الشهادات"
+
+msgid "الأحداث / Events"
+msgstr "الأحداث"
+
+msgid "المواقع / Map Locations"
+msgstr "المواقع الجغرافية"
+
+msgid "الحقب التاريخية / Historical Periods"
+msgstr "الحقب التاريخية"
+
+msgid "الموضوعات / Topics"
+msgstr "الموضوعات"
+
+msgid "أنواع الوثائق / Document Types"
+msgstr "أنواع الوثائق"
+
+msgid "%d وثيقة"
+msgstr "%d وثيقة"
+
+msgid "%d وثائق"
+msgstr "%d وثائق"

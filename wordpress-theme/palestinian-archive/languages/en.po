@@ -1,11 +1,206 @@
-# Palestinian Archive English Translation
-# Copyright (C) 2024
+# Palestinian Archive Theme - English Translation
+# Copyright (C) 2024 Palestinian Archive Project
+# This file is distributed under the same license as the Palestinian Archive theme.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: Palestinian Archive 1.0.0\n"
+"Report-Msgid-Bugs-To: https://example.com/contact\n"
 "POT-Creation-Date: 2024-01-01 00:00+0000\n"
-"Language: en_US\n"
+"PO-Revision-Date: 2024-01-01 00:00+0000\n"
+"Last-Translator: Palestinian Archive Project\n"
+"Language-Team: English\n"
+"Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "الرئيسية"
+msgstr "Home"
+
+msgid "الوثائق التاريخية"
+msgstr "Historical Documents"
+
+msgid "الأرشيف الفوتوغرافي"
+msgstr "Photo Archive"
+
+msgid "الشهادات الشفهية"
+msgstr "Oral Testimonies"
+
+msgid "الأحداث التاريخية"
+msgstr "Historical Events"
+
+msgid "الخريطة الجغرافية"
+msgstr "Geographic Map"
+
+msgid "بحث في الأرشيف"
+msgstr "Search the Archive"
+
+msgid "ابحث في الأرشيف... / Search the archive..."
+msgstr "Search the archive..."
+
+msgid "تصفية:"
+msgstr "Filter:"
+
+msgid "الحقبة التاريخية"
+msgstr "Historical Period"
+
+msgid "الموقع الجغرافي"
+msgstr "Geographic Location"
+
+msgid "الموضوع"
+msgstr "Topic"
+
+msgid "إعادة ضبط الفلتر"
+msgstr "Reset Filters"
+
+msgid "لا توجد نتائج / No results found"
+msgstr "No results found"
+
+msgid "جارٍ التحميل... / Loading..."
+msgstr "Loading..."
+
+msgid "إغلاق / Close"
+msgstr "Close"
+
+msgid "عرض الوثيقة"
+msgstr "View Document"
+
+msgid "قراءة المزيد"
+msgstr "Read More"
+
+msgid "اقرأ المزيد &hellip;"
+msgstr "Read more&hellip;"
+
+msgid "تصفح الأرشيف"
+msgstr "Browse the Archive"
+
+msgid "تعرف علينا"
+msgstr "About Us"
+
+msgid "أرشيف الذاكرة الفلسطينية"
+msgstr "Palestinian Memory Archive"
+
+msgid "حفظ التراث والتاريخ الفلسطيني للأجيال القادمة"
+msgstr "Preserving Palestinian Heritage and History for Future Generations"
+
+msgid "تخطى إلى المحتوى / Skip to content"
+msgstr "Skip to content"
+
+msgid "مسار التنقل"
+msgstr "Breadcrumb navigation"
+
+msgid "نتائج البحث عن: %s"
+msgstr "Search results for: %s"
+
+msgid "الصفحة غير موجودة"
+msgstr "Page Not Found"
+
+msgid "عذراً، الصفحة التي تبحث عنها غير موجودة."
+msgstr "Sorry, the page you are looking for does not exist."
+
+msgid "التاريخ الأصلي / Original Date"
+msgstr "Original Date"
+
+msgid "المؤسسة المصدر / Source Institution"
+msgstr "Source Institution"
+
+msgid "لغة الوثيقة / Document Language"
+msgstr "Document Language"
+
+msgid "رقم الملف المرجعي / File Reference"
+msgstr "File Reference Number"
+
+msgid "النص المكتوب / Transcription"
+msgstr "Transcription"
+
+msgid "الترجمة الإنجليزية / English Translation"
+msgstr "English Translation"
+
+msgid "اسم الشاهد / Speaker Name"
+msgstr "Speaker Name"
+
+msgid "سنة الميلاد / Birth Year"
+msgstr "Birth Year"
+
+msgid "القرية / Village of Origin"
+msgstr "Village of Origin"
+
+msgid "تاريخ المقابلة / Interview Date"
+msgstr "Interview Date"
+
+msgid "المحاور / Interviewer"
+msgstr "Interviewer"
+
+msgid "%d نتيجة"
+msgstr "%d result"
+
+msgid "© %1$s %2$s — جميع الحقوق محفوظة"
+msgstr "© %1$s %2$s — All Rights Reserved"
+
+msgid "من نحن"
+msgstr "About Us"
+
+msgid "المساهمة في الأرشيف"
+msgstr "Contribute to the Archive"
+
+msgid "سياسة الخصوصية"
+msgstr "Privacy Policy"
+
+msgid "اتصل بنا"
+msgstr "Contact Us"
+
+msgid "الوثائق / Documents"
+msgstr "Documents"
+
+msgid "الصور / Photos"
+msgstr "Photos"
+
+msgid "الشهادات / Testimonies"
+msgstr "Testimonies"
+
+msgid "الأحداث / Events"
+msgstr "Events"
+
+msgid "المواقع / Map Locations"
+msgstr "Map Locations"
+
+msgid "الحقب التاريخية / Historical Periods"
+msgstr "Historical Periods"
+
+msgid "الموضوعات / Topics"
+msgstr "Topics"
+
+msgid "أنواع الوثائق / Document Types"
+msgstr "Document Types"
+
+msgid "%d وثيقة"
+msgstr "%d document"
+
+msgid "%d وثائق"
+msgstr "%d documents"
+
+msgid "أحدث الوثائق"
+msgstr "Recent Documents"
+
+msgid "من الأرشيف الفوتوغرافي"
+msgstr "From the Photo Archive"
+
+msgid "الشهادات الشفهية"
+msgstr "Oral Testimonies"
+
+msgid "الأحداث التاريخية"
+msgstr "Historical Events"
+
+msgid "تصفح جميع الوثائق"
+msgstr "Browse All Documents"
+
+msgid "تصفح جميع الصور"
+msgstr "Browse All Photos"
+
+msgid "نتائج البحث:"
+msgstr "Search Results:"
+
+msgid "لم يتم العثور على نتائج"
+msgstr "No Results Found"
