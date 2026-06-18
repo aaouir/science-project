@@ -1,0 +1,11 @@
+# Palestinian Archive English Translation
+# Copyright (C) 2024
+msgid ""
+msgstr ""
+"Project-Id-Version: Palestinian Archive 1.0.0\n"
+"POT-Creation-Date: 2024-01-01 00:00+0000\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
