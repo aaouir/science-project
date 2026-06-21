@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aggregator App — Design Mockups</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0f0f0f; color: #fff; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif; }
+
+  h1.page-title {
+    text-align: center;
+    font-size: 28px;
+    font-weight: 700;
+    padding: 40px 20px 10px;
+    background: linear-gradient(135deg, #FF5757, #FF9B57, #57C8FF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  p.subtitle {
+    text-align: center;
+    color: #666;
+    font-size: 14px;
+    padding-bottom: 40px;
+  }
+
+  .section-header {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+    color: #aaa;
+    padding: 30px 0 20px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  .screens-row {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 0 20px 50px;
+  }
+
+  .phone {
+    width: 260px;
+    flex-shrink: 0;
+  }
+  .phone-label {
+    text-align: center;
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 12px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+  }
+  .phone-frame {
+    width: 260px;
+    height: 560px;
+    background: #1a1a1a;
+    border-radius: 44px;
+    border: 2px solid #333;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6), inset 0 0 0 1px #222;
+  }
+  .notch {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 26px;
+    background: #000;
+    border-radius: 0 0 16px 16px;
+    z-index: 10;
+  }
+  .screen {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* ── STATUS BAR ── */
+  .status-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 32px 20px 6px;
+    font-size: 10px;
+    color: #fff;
+    font-weight: 600;
+  }
+  .status-icons { display: flex; gap: 4px; align-items: center; }
+  .battery { width: 18px; height: 9px; border: 1.5px solid #fff; border-radius: 2px; position: relative; }
+  .battery::after { content:''; position:absolute; top:2px; left:2px; right:3px; bottom:2px; background:#fff; border-radius:1px; }
+  .wifi { font-size: 9px; }
+
+  /* ── SPLASH SCREEN ── */
+  .splash {
+    background: linear-gradient(160deg, #0d0d0d 0%, #1a0a2e 50%, #0d0d0d 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+  .splash-logo {
+    width: 80px; height: 80px;
+    background: linear-gradient(135deg, #FF5757, #FF9B57);
+    border-radius: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 40px rgba(255,87,87,0.4);
+  }
+  .splash-name { font-size: 28px; font-weight: 800; letter-spacing: 1px; }
+  .splash-tag { font-size: 12px; color: #888; margin-top: 6px; }
+  .splash-dots { display: flex; gap: 6px; margin-top: 40px; }
+  .splash-dots span { width: 6px; height: 6px; border-radius: 50%; background: #444; }
+  .splash-dots span:first-child { background: #FF5757; width: 18px; border-radius: 3px; }
+
+  /* ── HOME FEED ── */
+  .home-screen { background: #000; height: 100%; display: flex; flex-direction: column; }
+  .top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 36px 16px 10px;
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    z-index: 5;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, transparent 100%);
+  }
+  .top-tabs { display: flex; gap: 16px; }
+  .top-tab { font-size: 15px; font-weight: 600; color: #888; }
+  .top-tab.active { color: #fff; border-bottom: 2px solid #FF5757; padding-bottom: 2px; }
+  .top-icons { display: flex; gap: 12px; font-size: 18px; }
+
+  .reel-card {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background: linear-gradient(160deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    display: flex;
+    align-items: flex-end;
+  }
+  .reel-overlay-gradient {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 60%;
+    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 100%);
+  }
+  .reel-play-icon {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 40px;
+    opacity: 0.4;
+  }
+  .reel-thumbnail-placeholder {
+    position: absolute;
+    top: 30%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80px; height: 80px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 50%;
+    border: 2px dashed rgba(255,255,255,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+  }
+  .reel-info {
+    position: relative;
+    z-index: 2;
+    padding: 0 12px 70px 12px;
+    width: 100%;
+  }
+  .reel-source-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 20px;
+    padding: 3px 10px;
+    font-size: 10px;
+    margin-bottom: 8px;
+    backdrop-filter: blur(8px);
+  }
+  .source-dot { width: 6px; height: 6px; border-radius: 50%; }
+  .ig { background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045); }
+  .yt { background: #FF0000; }
+  .tt { background: #000; border: 1px solid #69C9D0; }
+
+  .reel-channel { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+  .channel-avatar {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: linear-gradient(135deg, #FF5757, #FF9B57);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 700; color: #fff;
+    border: 2px solid #fff;
+  }
+  .channel-name { font-size: 13px; font-weight: 700; }
+  .follow-btn {
+    margin-left: auto;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border: 1.5px solid #fff;
+    border-radius: 6px;
+    color: #fff;
+  }
+  .reel-desc { font-size: 11px; color: #ccc; line-height: 1.4; }
+
+  .reel-actions {
+    position: absolute;
+    right: 10px;
+    bottom: 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    z-index: 3;
+  }
+  .action-btn { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+  .action-icon { font-size: 22px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5)); }
+  .action-count { font-size: 10px; color: #ccc; font-weight: 600; }
+
+  /* ── BOTTOM NAV ── */
+  .bottom-nav {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 70px;
+    background: rgba(10,10,10,0.95);
+    border-top: 1px solid #222;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding-bottom: 8px;
+    z-index: 10;
+    backdrop-filter: blur(20px);
+  }
+  .nav-item { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+  .nav-icon { font-size: 20px; }
+  .nav-label { font-size: 9px; color: #666; font-weight: 500; }
+  .nav-item.active .nav-label { color: #FF5757; }
+  .nav-item.active .nav-icon { filter: none; }
+
+  /* ── DISCOVER ── */
+  .discover-screen { background: #0d0d0d; height: 100%; display: flex; flex-direction: column; }
+  .discover-header { padding: 36px 16px 12px; }
+  .discover-title { font-size: 22px; font-weight: 700; }
+  .search-bar {
+    display: flex; align-items: center; gap: 8px;
+    background: #1e1e1e; border-radius: 12px;
+    padding: 8px 12px; margin-top: 10px;
+  }
+  .search-icon { font-size: 14px; color: #666; }
+  .search-placeholder { font-size: 13px; color: #666; }
+
+  .filter-chips {
+    display: flex; gap: 8px; padding: 10px 16px;
+    overflow-x: auto;
+  }
+  .chip {
+    flex-shrink: 0;
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 11px; font-weight: 600;
+    border: 1.5px solid #333;
+    color: #888;
+  }
+  .chip.active { background: #FF5757; border-color: #FF5757; color: #fff; }
+  .chip.ig-chip { border-color: #833ab4; color: #833ab4; }
+  .chip.yt-chip { border-color: #FF0000; color: #FF0000; }
+  .chip.tt-chip { border-color: #69C9D0; color: #69C9D0; }
+
+  .channel-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 8px 16px; }
+  .channel-card {
+    background: #1a1a1a;
+    border-radius: 12px;
+    padding: 12px;
+    border: 1px solid #222;
+  }
+  .cc-top { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+  .cc-avatar {
+    width: 36px; height: 36px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; font-weight: 700; color: #fff;
+  }
+  .cc-name { font-size: 12px; font-weight: 600; }
+  .cc-handle { font-size: 10px; color: #666; }
+  .cc-platform {
+    display: inline-flex; align-items: center; gap: 4px;
+    font-size: 9px; color: #888;
+    background: #111; border-radius: 8px; padding: 2px 8px;
+    margin-bottom: 6px;
+  }
+  .cc-stats { font-size: 10px; color: #666; }
+  .cc-stats span { color: #fff; font-weight: 600; }
+
+  /* ── CHANNEL DETAIL ── */
+  .ch-detail-screen { background: #0d0d0d; height: 100%; }
+  .ch-detail-header {
+    height: 130px;
+    background: linear-gradient(135deg, #1a0a2e, #0f3460);
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    padding: 12px 16px;
+  }
+  .ch-back { position: absolute; top: 36px; left: 16px; font-size: 20px; }
+  .ch-share { position: absolute; top: 36px; right: 16px; font-size: 18px; }
+  .ch-avatar-lg {
+    width: 56px; height: 56px; border-radius: 50%;
+    background: linear-gradient(135deg, #FF5757, #FF9B57);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px; font-weight: 700; color: #fff;
+    border: 3px solid #0d0d0d;
+    margin-right: 12px;
+  }
+  .ch-info-block { flex: 1; }
+  .ch-name-lg { font-size: 16px; font-weight: 700; }
+  .ch-handle-lg { font-size: 11px; color: #888; }
+  .ch-platform-badges { display: flex; gap: 6px; margin-top: 4px; }
+  .platform-badge {
+    font-size: 9px; padding: 2px 8px; border-radius: 10px;
+    font-weight: 600;
+  }
+  .pb-ig { background: rgba(131,58,180,0.3); color: #c77dff; }
+  .pb-yt { background: rgba(255,0,0,0.2); color: #ff6b6b; }
+  .pb-tt { background: rgba(105,201,208,0.2); color: #69C9D0; }
+
+  .ch-stats-row {
+    display: flex; gap: 20px;
+    padding: 14px 16px;
+    border-bottom: 1px solid #1a1a1a;
+  }
+  .ch-stat { text-align: center; }
+  .ch-stat-val { font-size: 16px; font-weight: 700; }
+  .ch-stat-label { font-size: 9px; color: #666; margin-top: 2px; }
+
+  .reel-mini-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2px; padding: 2px; }
+  .reel-mini {
+    aspect-ratio: 9/16;
+    background: #1a1a2e;
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; color: rgba(255,255,255,0.2);
+  }
+  .reel-mini:nth-child(2) { background: #16213e; }
+  .reel-mini:nth-child(3) { background: #1a2a1a; }
+  .reel-mini:nth-child(4) { background: #2a1a1a; }
+  .reel-mini:nth-child(5) { background: #1a1a2e; }
+  .reel-mini:nth-child(6) { background: #2a1a2a; }
+  .mini-source { position: absolute; top: 3px; left: 3px; font-size: 8px; background: rgba(0,0,0,0.6); border-radius: 4px; padding: 1px 4px; }
+
+  /* ── SUGGEST CHANNEL ── */
+  .suggest-screen { background: #0d0d0d; height: 100%; padding-top: 32px; }
+  .suggest-header { padding: 12px 16px 20px; }
+  .suggest-back { font-size: 20px; margin-bottom: 12px; }
+  .suggest-title { font-size: 22px; font-weight: 700; }
+  .suggest-sub { font-size: 12px; color: #666; margin-top: 4px; }
+
+  .form-group { padding: 0 16px; margin-bottom: 14px; }
+  .form-label { font-size: 11px; color: #888; font-weight: 600; margin-bottom: 6px; letter-spacing: 0.5px; }
+  .form-input {
+    width: 100%;
+    background: #1a1a1a;
+    border: 1.5px solid #2a2a2a;
+    border-radius: 10px;
+    padding: 10px 12px;
+    color: #fff;
+    font-size: 13px;
+  }
+  .platform-selector { display: flex; gap: 8px; }
+  .plat-btn {
+    flex: 1; padding: 8px 4px;
+    background: #1a1a1a;
+    border-radius: 10px;
+    border: 1.5px solid #2a2a2a;
+    display: flex; flex-direction: column; align-items: center; gap: 3px;
+    font-size: 10px; color: #666; font-weight: 600;
+  }
+  .plat-btn.sel-ig { border-color: #833ab4; color: #c77dff; background: rgba(131,58,180,0.1); }
+  .plat-btn span { font-size: 18px; }
+
+  .submit-btn {
+    margin: 0 16px;
+    background: linear-gradient(135deg, #FF5757, #FF9B57);
+    border-radius: 14px;
+    padding: 14px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 700;
+    color: #fff;
+    box-shadow: 0 4px 20px rgba(255,87,87,0.3);
+  }
+
+  /* ── ADMIN ── */
+  .admin-screen { background: #0d0d0d; height: 100%; }
+  .admin-header {
+    padding: 36px 16px 14px;
+    border-bottom: 1px solid #1a1a1a;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .admin-title { font-size: 20px; font-weight: 700; }
+  .admin-badge {
+    background: rgba(255,87,87,0.2);
+    color: #FF5757;
+    font-size: 10px; font-weight: 700;
+    padding: 3px 10px; border-radius: 10px;
+    border: 1px solid rgba(255,87,87,0.3);
+  }
+  .admin-stats-row {
+    display: grid; grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px; padding: 14px 16px;
+  }
+  .admin-stat-card {
+    background: #1a1a1a;
+    border-radius: 12px;
+    padding: 10px;
+    border: 1px solid #222;
+    text-align: center;
+  }
+  .admin-stat-icon { font-size: 18px; margin-bottom: 4px; }
+  .admin-stat-val { font-size: 18px; font-weight: 700; }
+  .admin-stat-label { font-size: 9px; color: #666; margin-top: 2px; }
+
+  .admin-section-title { font-size: 12px; font-weight: 600; color: #888; padding: 10px 16px 6px; letter-spacing: 1px; text-transform: uppercase; }
+  .suggestion-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 16px;
+    border-bottom: 1px solid #1a1a1a;
+  }
+  .sug-avatar {
+    width: 38px; height: 38px; border-radius: 50%;
+    background: #1a1a2e;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+  .sug-info { flex: 1; }
+  .sug-name { font-size: 12px; font-weight: 600; }
+  .sug-meta { font-size: 10px; color: #666; }
+  .sug-actions { display: flex; gap: 6px; }
+  .sug-approve {
+    background: rgba(34,197,94,0.2); color: #22c55e;
+    border: 1px solid rgba(34,197,94,0.3);
+    border-radius: 8px; padding: 4px 8px; font-size: 10px; font-weight: 700;
+  }
+  .sug-reject {
+    background: rgba(239,68,68,0.2); color: #ef4444;
+    border: 1px solid rgba(239,68,68,0.3);
+    border-radius: 8px; padding: 4px 8px; font-size: 10px; font-weight: 700;
+  }
+
+  .channel-manage-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 16px;
+    border-bottom: 1px solid #1a1a1a;
+  }
+  .cm-avatar {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: linear-gradient(135deg, #FF5757, #FF9B57);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 700; flex-shrink: 0;
+  }
+  .cm-info { flex: 1; }
+  .cm-name { font-size: 12px; font-weight: 600; }
+  .cm-meta { font-size: 10px; color: #666; }
+  .cm-toggle {
+    width: 32px; height: 18px; background: #22c55e; border-radius: 9px; position: relative;
+    flex-shrink: 0;
+  }
+  .cm-toggle::after { content:''; position:absolute; top:2px; right:2px; width:14px; height:14px; background:#fff; border-radius:50%; }
+
+  /* ── PROFILE / SETTINGS ── */
+  .settings-screen { background: #0d0d0d; height: 100%; }
+  .settings-header { padding: 36px 16px 20px; text-align: center; }
+  .profile-avatar-lg {
+    width: 70px; height: 70px; border-radius: 50%;
+    background: linear-gradient(135deg, #FF5757, #FF9B57);
+    margin: 0 auto 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; font-weight: 700; color: #fff;
+  }
+  .profile-name { font-size: 18px; font-weight: 700; }
+  .profile-role { font-size: 11px; color: #888; margin-top: 3px; }
+
+  .settings-section { padding: 0 16px; margin-bottom: 20px; }
+  .settings-section-title { font-size: 11px; font-weight: 600; color: #666; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.8px; }
+  .settings-item {
+    display: flex; align-items: center; gap: 12px;
+    background: #1a1a1a; border-radius: 12px;
+    padding: 12px 14px; margin-bottom: 2px;
+    border: 1px solid #222;
+  }
+  .settings-icon { font-size: 16px; width: 28px; text-align: center; }
+  .settings-text { flex: 1; font-size: 13px; font-weight: 500; }
+  .settings-arrow { font-size: 12px; color: #444; }
+  .settings-toggle { width: 32px; height: 18px; background: #22c55e; border-radius: 9px; position: relative; }
+  .settings-toggle::after { content:''; position:absolute; top:2px; right:2px; width:14px; height:14px; background:#fff; border-radius:50%; }
+  .settings-toggle.off { background: #333; }
+  .settings-toggle.off::after { right: auto; left: 2px; }
+
+  /* ── ARCHITECTURE DIAGRAM ── */
+  .arch-section {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px 30px 60px;
+  }
+  .arch-card {
+    background: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 20px;
+  }
+  .arch-card h3 { font-size: 16px; font-weight: 600; color: #FF9B57; margin-bottom: 16px; }
+  .arch-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .arch-item {
+    background: #111;
+    border-radius: 10px;
+    padding: 14px;
+    border: 1px solid #222;
+  }
+  .arch-item h4 { font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+  .arch-item p { font-size: 11px; color: #666; line-height: 1.5; }
+  .arch-flow {
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 8px;
+  }
+  .arch-node {
+    background: #111; border: 1px solid #2a2a2a;
+    border-radius: 8px; padding: 8px 12px;
+    font-size: 11px; text-align: center; color: #ccc;
+  }
+  .arch-arrow { color: #444; font-size: 18px; }
+  .arch-node.highlight { border-color: #FF5757; color: #FF5757; }
+
+  .color-palette {
+    display: flex; gap: 12px; flex-wrap: wrap; margin-top: 10px;
+  }
+  .color-swatch { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+  .swatch { width: 44px; height: 44px; border-radius: 10px; }
+  .swatch-label { font-size: 10px; color: #666; }
+
+  .tech-stack { display: flex; gap: 8px; flex-wrap: wrap; }
+  .tech-tag {
+    background: #111; border: 1px solid #2a2a2a;
+    border-radius: 20px; padding: 5px 12px;
+    font-size: 11px; color: #ccc;
+  }
+  .tech-tag.primary { border-color: #FF5757; color: #FF5757; }
+</style>
+</head>
+<body>
+
+<h1 class="page-title">Aggregator — iPhone App Design</h1>
+<p class="subtitle">Short-form video aggregator · Instagram · YouTube · TikTok</p>
+
+<!-- ════════════════════════════════════════════════════ -->
+<div class="section-header">User Screens</div>
+
+<div class="screens-row">
+
+  <!-- SPLASH -->
+  <div class="phone">
+    <div class="phone-label">1 · Splash Screen</div>
+    <div class="phone-frame">
+      <div class="notch"></div>
+      <div class="screen">
+        <div class="splash">
+          <div class="splash-logo">▶</div>
+          <div class="splash-name">Aggregator</div>
+          <div class="splash-tag">All your reels in one place</div>
+          <div class="splash-dots">
+            <span></span><span></span><span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HOME FEED -->
+  <div class="phone">
+    <div class="phone-label">2 · Home Feed</div>
+    <div class="phone-frame">
+      <div class="notch"></div>
+      <div class="screen" style="position:relative;">
+        <div class="top-bar">
+          <div class="top-tabs">
+            <div class="top-tab active">For You</div>
+            <div class="top-tab">Following</div>
+          </div>
+          <div class="top-icons">🔔 🔍</div>
+        </div>
+        <div class="reel-card">
+          <div class="reel-thumbnail-placeholder">🎬</div>
+          <div class="reel-overlay-gradient"></div>
+          <div class="reel-info">
+            <div class="reel-source-badge">
+              <div class="source-dot ig"></div>
+              Instagram Reel
+            </div>
+            <div class="reel-channel">
+              <div class="channel-avatar">N</div>
+              <div>
+                <div class="channel-name">@natgeo</div>
+              </div>
+              <div class="follow-btn">+ Follow</div>
+            </div>
+            <div class="reel-desc">Amazing wildlife footage from the Amazon 🌿 #nature #wildlife</div>
+          </div>
+          <div class="reel-actions">
+            <div class="action-btn"><div class="action-icon">❤️</div><div class="action-count">42K</div></div>
+            <div class="action-btn"><div class="action-icon">💬</div><div class="action-count">1.2K</div></div>
+            <div class="action-btn"><div class="action-icon">🔗</div><div class="action-count">Share</div></div>
+            <div class="action-btn"><div class="action-icon">⋯</div></div>
+          </div>
+        </div>
+        <div class="bottom-nav">
+          <div class="nav-item active"><div class="nav-icon">🏠</div><div class="nav-label">Home</div></div>
+          <div class="nav-item"><div class="nav-icon">🔍</div><div class="nav-label">Discover</div></div>
+          <div class="nav-item"><div class="nav-icon" style="background:linear-gradient(135deg,#FF5757,#FF9B57);border-radius:8px;padding:4px;">＋</div><div class="nav-label">Suggest</div></div>
+          <div class="nav-item"><div class="nav-icon">💾</div><div class="nav-label">Saved</div></div>
+          <div class="nav-item"><div class="nav-icon">👤</div><div class="nav-label">Profile</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DISCOVER -->
+  <div class="phone">
+    <div class="phone-label">3 · Discover Channels</div>
+    <div class="phone-frame">
+      <div class="notch"></div>
+      <div class="screen">
+        <div class="discover-header">
+          <div style="font-size:10px;color:#666;padding-bottom:4px;padding-top:26px;">DISCOVER</div>
+          <div class="discover-title">Channels</div>
+          <div class="search-bar">
+            <div class="search-icon">🔍</div>
+            <div class="search-placeholder">Search channels…</div>
+          </div>
+        </div>
+        <div class="filter-chips">
+          <div class="chip active">All</div>
+          <div class="chip ig-chip">Instagram</div>
+          <div class="chip yt-chip">YouTube</div>
+          <div class="chip tt-chip">TikTok</div>
+        </div>
+        <div class="channel-grid">
+          <div class="channel-card">
+            <div class="cc-top">
+              <div class="cc-avatar" style="background:linear-gradient(135deg,#833ab4,#fd1d1d);">N</div>
+              <div>
+                <div class="cc-name">Nat Geo</div>
+                <div class="cc-handle">@natgeo</div>
+              </div>
+            </div>
+            <div class="cc-platform"><span style="font-size:8px;">●</span> Instagram</div>
+            <div class="cc-stats"><span>128</span> reels</div>
+          </div>
+          <div class="channel-card">
+            <div class="cc-top">
+              <div class="cc-avatar" style="background:#FF0000;">▶</div>
+              <div>
+                <div class="cc-name">MrBeast</div>
+                <div class="cc-handle">@mrbeast</div>
+              </div>
+            </div>
+            <div class="cc-platform"><span style="color:#FF0000;font-size:8px;">●</span> YouTube</div>
+            <div class="cc-stats"><span>84</span> shorts</div>
+          </div>
+          <div class="channel-card">
+            <div class="cc-top">
+              <div class="cc-avatar" style="background:#111;border:1.5px solid #69C9D0;color:#69C9D0;">♪</div>
+              <div>
+                <div class="cc-name">Charli D'A</div>
+                <div class="cc-handle">@charlidamelio</div>
+              </div>
+            </div>
+            <div class="cc-platform"><span style="color:#69C9D0;font-size:8px;">●</span> TikTok</div>
+            <div class="cc-stats"><span>210</span> videos</div>
+          </div>
+          <div class="channel-card">
+            <div class="cc-top">
+              <div class="cc-avatar" style="background:linear-gradient(135deg,#0077B5,#00a0dc);">in</div>
+              <div>
+                <div class="cc-name">TED Talks</div>
+                <div class="cc-handle">@ted</div>
+              </div>
+            </div>
+            <div class="cc-platform"><span style="color:#FF0000;font-size:8px;">●</span> YouTube</div>
+            <div class="cc-stats"><span>56</span> shorts</div>
+          </div>
+        </div>
+        <div class="bottom-nav">
+          <div class="nav-item"><div class="nav-icon">🏠</div><div class="nav-label">Home</div></div>
+          <div class="nav-item active"><div class="nav-icon">🔍</div><div class="nav-label">Discover</div></div>
+          <div class="nav-item"><div class="nav-icon" style="background:linear-gradient(135deg,#FF5757,#FF9B57);border-radius:8px;padding:4px;">＋</div><div class="nav-label">Suggest</div></div>
+          <div class="nav-item"><div class="nav-icon">💾</div><div class="nav-label">Saved</div></div>
+          <div class="nav-item"><div class="nav-icon">👤</div><div class="nav-label">Profile</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="screens-row">
+
+  <!-- CHANNEL DETAIL -->
+  <div class="phone">
+    <div class="phone-label">4 · Channel Detail</div>
+    <div class="phone-frame">
+      <div class="notch"></div>
+      <div class="screen">
+        <div class="ch-detail-screen">
+          <div class="ch-detail-header">
+            <div class="ch-back">←</div>
+            <div class="ch-share">⋯</div>
+            <div class="ch-avatar-lg">N</div>
+            <div class="ch-info-block">
+              <div class="ch-name-lg">National Geographic</div>
+              <div class="ch-handle-lg">@natgeo</div>
+              <div class="ch-platform-badges">
+                <div class="platform-badge pb-ig">Instagram</div>
+                <div class="platform-badge pb-yt">YouTube</div>
+              </div>
+            </div>
+          </div>
+          <div class="ch-stats-row">
+            <div class="ch-stat"><div class="ch-stat-val">128</div><div class="ch-stat-label">Reels</div></div>
+            <div class="ch-stat"><div class="ch-stat-val">2.3M</div><div class="ch-stat-label">Followers</div></div>
+            <div class="ch-stat"><div class="ch-stat-val">4.8★</div><div class="ch-stat-label">Rating</div></div>
+          </div>
+          <div style="padding:0 16px 10px; display:flex; gap:8px;">
+            <div style="flex:1;background:linear-gradient(135deg,#FF5757,#FF9B57);border-radius:10px;padding:8px;text-align:center;font-size:12px;font-weight:700;">Follow</div>
+            <div style="flex:0;background:#1a1a1a;border-radius:10px;padding:8px 12px;font-size:12px;border:1px solid #333;">🔔</div>
+          </div>
+          <div class="reel-mini-grid">
+            <div class="reel-mini"><div class="mini-source">IG</div>▶</div>
+            <div class="reel-mini"><div class="mini-source">YT</div>▶</div>
+            <div class="reel-mini"><div class="mini-source">IG</div>▶</div>
+            <div class="reel-mini"><div class="mini-source">YT</div>▶</div>
+            <div class="reel-mini"><div class="mini-source">IG</div>▶</div>
+            <div class="reel-mini"><div class="mini-source">IG</div>▶</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUGGEST CHANNEL -->
+  <div class="phone">
+    <div class="phone-label">5 · Suggest a Channel</div>
+    <div class="phone-frame">
+      <div class="notch"></div>
+      <div class="screen">
+        <div class="suggest-screen">
+          <div class="suggest-header">
+            <div class="suggest-back">←</div>
+            <div class="suggest-title">Suggest a Channel</div>
+            <div class="suggest-sub">Reviewed & approved by our team</div>
+          </div>
+          <div class="form-group">
+            <div class="form-label">PLATFORM</div>
+            <div class="platform-selector">
+              <div class="plat-btn sel-ig"><span>📸</span>Instagram</div>
+              <div class="plat-btn"><span>▶️</span>YouTube</div>
+              <div class="plat-btn"><span>🎵</span>TikTok</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="form-label">CHANNEL HANDLE / URL</div>
+            <div class="form-input" style="color:#666;">e.g. @natgeo or paste URL</div>
+          </div>
+          <div class="form-group">
+            <div class="form-label">CHANNEL NAME</div>
+            <div class="form-input" style="color:#666;">Display name</div>
+          </div>
+          <div class="form-group">
+            <div class="form-label">WHY SUGGEST THIS? (optional)</div>
+            <div class="form-input" style="color:#666;height:52px;">Tell us why this channel is great…</div>
+          </div>
+          <div class="submit-btn">Submit Suggestion →</div>
+          <div style="text-align:center;font-size:10px;color:#444;margin-top:12px;">Suggestions are reviewed within 24–48 hours</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SETTINGS / PROFILE -->
+  <div class="phone">
+    <div class="phone-label">6 · Profile & Settings</div>
+    <div class="phone-frame">
+      <div class="notch"></div>
+      <div class="screen">
+        <div class="settings-screen">
+          <div class="settings-header">
+            <div style="padding-top:26px;"></div>
+            <div class="profile-avatar-lg">A</div>
+            <div class="profile-name">Alex Johnson</div>
+            <div class="profile-role">Member since Jan 2026</div>
+          </div>
+          <div class="settings-section">
+            <div class="settings-section-title">Preferences</div>
+            <div class="settings-item">
+              <div class="settings-icon">📱</div>
+              <div class="settings-text">Autoplay Reels</div>
+              <div class="settings-toggle"></div>
+            </div>
+            <div class="settings-item">
+              <div class="settings-icon">🔔</div>
+              <div class="settings-text">Notifications</div>
+              <div class="settings-toggle"></div>
+            </div>
+            <div class="settings-item">
+              <div class="settings-icon">🌙</div>
+              <div class="settings-text">Dark Mode</div>
+              <div class="settings-toggle"></div>
+            </div>
+          </div>
+          <div class="settings-section">
+            <div class="settings-section-title">Account</div>
+            <div class="settings-item">
+              <div class="settings-icon">📋</div>
+              <div class="settings-text">My Suggestions</div>
+              <div class="settings-arrow">›</div>
+            </div>
+            <div class="settings-item">
+              <div class="settings-icon">💾</div>
+              <div class="settings-text">Saved Reels</div>
+              <div class="settings-arrow">›</div>
+            </div>
+            <div class="settings-item" style="color:#ef4444;">
+              <div class="settings-icon">🚪</div>
+              <div class="settings-text" style="color:#ef4444;">Sign Out</div>
+              <div class="settings-arrow">›</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ════════════════════════════════════════════════════ -->
+<div class="section-header">Admin Panel</div>
+
+<div class="screens-row">
+
+  <!-- ADMIN DASHBOARD -->
+  <div class="phone">
+    <div class="phone-label">7 · Admin Dashboard</div>
+    <div class="phone-frame">
+      <div class="notch"></div>
+      <div class="screen">
+        <div class="admin-screen">
+          <div class="admin-header">
+            <div>
+              <div class="admin-title">Admin Panel</div>
+              <div style="font-size:10px;color:#666;margin-top:2px;">Aggregator Management</div>
+            </div>
+            <div class="admin-badge">ADMIN</div>
+          </div>
+          <div class="admin-stats-row">
+            <div class="admin-stat-card">
+              <div class="admin-stat-icon">📺</div>
+              <div class="admin-stat-val">42</div>
+              <div class="admin-stat-label">Channels</div>
+            </div>
+            <div class="admin-stat-card">
+              <div class="admin-stat-icon">⏳</div>
+              <div class="admin-stat-val" style="color:#f59e0b;">7</div>
+              <div class="admin-stat-label">Pending</div>
+            </div>
+            <div class="admin-stat-card">
+              <div class="admin-stat-icon">👥</div>
+              <div class="admin-stat-val">1.2K</div>
+              <div class="admin-stat-label">Users</div>
+            </div>
+          </div>
+          <div class="admin-section-title">Pending Suggestions</div>
+          <div class="suggestion-item">
+            <div class="sug-avatar">📸</div>
+            <div class="sug-info">
+              <div class="sug-name">@therock</div>
+              <div class="sug-meta">Instagram · by user123 · 2h ago</div>
+            </div>
+            <div class="sug-actions">
+              <div class="sug-approve">✓</div>
+              <div class="sug-reject">✕</div>
+            </div>
+          </div>
+          <div class="suggestion-item">
+            <div class="sug-avatar">▶️</div>
+            <div class="sug-info">
+              <div class="sug-name">Veritasium</div>
+              <div class="sug-meta">YouTube · by user456 · 5h ago</div>
+            </div>
+            <div class="sug-actions">
+              <div class="sug-approve">✓</div>
+              <div class="sug-reject">✕</div>
+            </div>
+          </div>
+          <div class="admin-section-title">Active Channels</div>
+          <div class="channel-manage-item">
+            <div class="cm-avatar">N</div>
+            <div class="cm-info">
+              <div class="cm-name">Nat Geo</div>
+              <div class="cm-meta">Instagram · 128 reels synced</div>
+            </div>
+            <div class="cm-toggle"></div>
+          </div>
+          <div class="channel-manage-item">
+            <div class="cm-avatar" style="background:#FF0000;">▶</div>
+            <div class="cm-info">
+              <div class="cm-name">MrBeast</div>
+              <div class="cm-meta">YouTube · 84 shorts synced</div>
+            </div>
+            <div class="cm-toggle"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADMIN ADD CHANNEL -->
+  <div class="phone">
+    <div class="phone-label">8 · Admin — Add Channel</div>
+    <div class="phone-frame">
+      <div class="notch"></div>
+      <div class="screen">
+        <div class="suggest-screen">
+          <div class="suggest-header">
+            <div class="suggest-back">←</div>
+            <div class="suggest-title">Add Channel</div>
+            <div class="suggest-sub">New channel for all users</div>
+          </div>
+          <div class="form-group">
+            <div class="form-label">PLATFORM</div>
+            <div class="platform-selector">
+              <div class="plat-btn"><span>📸</span>Instagram</div>
+              <div class="plat-btn sel-ig" style="border-color:#FF0000;color:#ff6b6b;background:rgba(255,0,0,0.1);"><span>▶️</span>YouTube</div>
+              <div class="plat-btn"><span>🎵</span>TikTok</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="form-label">CHANNEL HANDLE / URL</div>
+            <div class="form-input">@mrbeast</div>
+          </div>
+          <div class="form-group">
+            <div class="form-label">DISPLAY NAME</div>
+            <div class="form-input">MrBeast</div>
+          </div>
+          <div class="form-group">
+            <div class="form-label">CATEGORY</div>
+            <div class="form-input" style="color:#666;">Entertainment, Comedy…</div>
+          </div>
+          <div class="form-group">
+            <div class="form-label">SYNC FREQUENCY</div>
+            <div class="form-input" style="color:#666;">Every 6 hours ▾</div>
+          </div>
+          <div class="submit-btn" style="background:linear-gradient(135deg,#6366f1,#8b5cf6);">Add Channel</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ════════════════════════════════════════════════════ -->
+<div class="section-header">Design System & Architecture</div>
+
+<div class="arch-section">
+
+  <div class="arch-card">
+    <h3>Color Palette</h3>
+    <div class="color-palette">
+      <div class="color-swatch"><div class="swatch" style="background:#FF5757;"></div><div class="swatch-label">Primary Red</div></div>
+      <div class="color-swatch"><div class="swatch" style="background:#FF9B57;"></div><div class="swatch-label">Accent Orange</div></div>
+      <div class="color-swatch"><div class="swatch" style="background:#57C8FF;"></div><div class="swatch-label">Info Blue</div></div>
+      <div class="color-swatch"><div class="swatch" style="background:#0d0d0d;border:1px solid #333;"></div><div class="swatch-label">Background</div></div>
+      <div class="color-swatch"><div class="swatch" style="background:#1a1a1a;border:1px solid #333;"></div><div class="swatch-label">Card</div></div>
+      <div class="color-swatch"><div class="swatch" style="background:#22c55e;"></div><div class="swatch-label">Success</div></div>
+      <div class="color-swatch"><div class="swatch" style="background:#ef4444;"></div><div class="swatch-label">Danger</div></div>
+      <div class="color-swatch"><div class="swatch" style="background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);"></div><div class="swatch-label">Instagram</div></div>
+      <div class="color-swatch"><div class="swatch" style="background:#FF0000;"></div><div class="swatch-label">YouTube</div></div>
+      <div class="color-swatch"><div class="swatch" style="background:#69C9D0;"></div><div class="swatch-label">TikTok</div></div>
+    </div>
+  </div>
+
+  <div class="arch-card">
+    <h3>App Architecture</h3>
+    <div class="arch-flow">
+      <div class="arch-node highlight">iOS App<br><small>SwiftUI</small></div>
+      <div class="arch-arrow">⟷</div>
+      <div class="arch-node">REST API<br><small>Backend</small></div>
+      <div class="arch-arrow">⟷</div>
+      <div class="arch-node">DB<br><small>PostgreSQL</small></div>
+      <div class="arch-arrow">⟷</div>
+      <div class="arch-node">Sync Worker<br><small>Background</small></div>
+      <div class="arch-arrow">⟷</div>
+      <div class="arch-node">IG / YT / TT<br><small>APIs / Scrapers</small></div>
+    </div>
+  </div>
+
+  <div class="arch-card">
+    <h3>Key Features</h3>
+    <div class="arch-grid">
+      <div class="arch-item">
+        <h4>📺 Multi-Source Feed</h4>
+        <p>Vertical-scroll reel feed aggregating content from Instagram, YouTube Shorts & TikTok. Platform badge on each card. Filter by source.</p>
+      </div>
+      <div class="arch-item">
+        <h4>📢 Channel Management</h4>
+        <p>Admins add/remove/toggle channels. Periodic content sync. Each channel tagged to one or more platforms.</p>
+      </div>
+      <div class="arch-item">
+        <h4>💡 User Suggestions</h4>
+        <p>Users suggest new channels via in-app form. Suggestions enter a queue. Admins approve or reject from the admin panel.</p>
+      </div>
+      <div class="arch-item">
+        <h4>🔐 Role-Based Access</h4>
+        <p>Two roles: regular User and Admin. Admin panel accessible only to admin accounts. Auth via Apple Sign-In / email.</p>
+      </div>
+      <div class="arch-item">
+        <h4>🔔 Notifications</h4>
+        <p>Push alerts when a suggested channel is approved or rejected. New content alerts from followed channels.</p>
+      </div>
+      <div class="arch-item">
+        <h4>💾 Save & Share</h4>
+        <p>Bookmark reels to a personal saved list. Native iOS share sheet to share to any app.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="arch-card">
+    <h3>Tech Stack</h3>
+    <div class="tech-stack">
+      <div class="tech-tag primary">SwiftUI</div>
+      <div class="tech-tag primary">iOS 17+</div>
+      <div class="tech-tag">AVKit (video playback)</div>
+      <div class="tech-tag">Combine / async-await</div>
+      <div class="tech-tag">URLSession</div>
+      <div class="tech-tag">UserNotifications</div>
+      <div class="tech-tag">CoreData (offline cache)</div>
+      <div class="tech-tag">Swift Package Manager</div>
+      <div class="tech-tag">Kingfisher (image cache)</div>
+      <div class="tech-tag">MVVM Architecture</div>
+    </div>
+  </div>
+
+  <div class="arch-card">
+    <h3>Screen Map</h3>
+    <div style="display:flex;flex-direction:column;gap:8px;font-size:12px;color:#ccc;line-height:1.8;">
+      <div>📱 <strong>Launch</strong> → Splash → Auth (Sign In / Sign Up)</div>
+      <div>🏠 <strong>Main Tab Bar:</strong></div>
+      <div style="padding-left:20px;">├ Home — Full-screen reel feed (For You / Following)</div>
+      <div style="padding-left:20px;">├ Discover — Channel grid with search + platform filters</div>
+      <div style="padding-left:40px;">└ Channel Detail — Bio, stats, reel grid, follow button</div>
+      <div style="padding-left:20px;">├ Suggest — Submit a channel suggestion form</div>
+      <div style="padding-left:20px;">├ Saved — Personal bookmarked reels list</div>
+      <div style="padding-left:20px;">└ Profile — Settings, my suggestions, sign out</div>
+      <div>🛡️ <strong>Admin (role-gated):</strong></div>
+      <div style="padding-left:20px;">├ Dashboard — Stats + pending suggestions + active channels</div>
+      <div style="padding-left:20px;">├ Add Channel — Create new channel manually</div>
+      <div style="padding-left:20px;">└ Suggestion Review — Approve / Reject queue</div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
